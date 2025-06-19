@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Submitted Messages</h2>
+  <ul>
+    {% for msg in messages %}
+      <li>
+        <strong>{{ msg.name }}</strong> ({{ msg.email }}) at {{ msg.submitted_at }}<br>
+        {{ msg.message }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

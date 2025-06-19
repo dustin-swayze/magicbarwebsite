@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Magic Bar</title>
+  <link rel="stylesheet" href="{% static 'main/style.css' %}">
+</head>
+<body>
+
+  <header>
+    <div><strong>Little Magic  </strong></div>
+    <nav class="navbar">
+  <div class="nav-brand">Little Magic   </div>
+  <button class="nav-toggle" onclick="toggleNav()">☰</button>
+  <div class="nav-links" id="nav-links">
+    <a href="/">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Menus ▾</button>
+      <div class="dropdown-content">
+        <a href="/bar-menu">Bar Menu</a>
+        <a href="/kitchen-menu">Kitchen Menu</a>
+      </div>
+    </div>
+    <a href="/contact">Contact</a>
+  </div>
+</nav>
+  </header>
+
+  <main style="padding: 1rem;">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer>
+    © {{ now.year }} Magic Bar — Follow us on 
+    <a href="https://instagram.com/littlemagicbarjc" style="color: #ef476f;">Instagram</a>
+  </footer>
+
+
+  <script>
+  function toggleNav() {
+    const links = document.getElementById("nav-links");
+    links.classList.toggle("show");
+  }
+</script>
+
+{% block extra_scripts %}{% endblock %}
+
+</body>
+</html>

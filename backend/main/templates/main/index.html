@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %}Home | Magic Bar{% endblock %}
+
+{% block content %}
+  <div class="info">
+    <h2>Bar Hours</h2>
+    <ul>
+      <li>Mon: 4pm – 11pm</li>
+      <li>Tue: Closed</li>
+      <li>Wed–Thu: 4pm – 11pm</li>
+      <li>Fri–Sat: 4pm – 1am</li>
+      <li>Sun: 2pm – 9pm</li>
+    </ul>
+    <h2>Kitchen Hours</h2>
+    <ul>
+      <li>Mon: 4pm – 11pm</li>
+      <li>Tue: Closed</li>
+      <li>Wed–Thu: 4pm – 11pm</li>
+      <li>Fri–Sat: 4pm – 1am</li>
+      <li>Sun: 2pm – 9pm</li>
+    </ul>
+  </div>
+
+  <!-- Swiper Carousel -->
+  <div class="swiper mySwiper">
+  <div class="swiper-wrapper">
+    {% for img in carousel_images %}
+      <div class="swiper-slide">
+        <img src="{{ img.image.url }}" alt="Slide {{ forloop.counter }}">
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Optional Pagination + Arrows -->
+  <div class="swiper-pagination"></div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+
+
+  <!-- Cocktail Menu -->
+  {% if latest_menu %}
+    <section>
+      <h2>Cocktail Menu</h2>
+      <img src="{{ latest_menu.image.url }}" alt="Cocktail Menu" style="max-width: 100%;">
+    </section>
+  {% endif %}
+
+  <!-- Kitchen Menu -->
+  {% if latest_kitchen_menu %}
+    <section>
+      <h2>Kitchen Menu</h2>
+      <img src="{{ latest_kitchen_menu.image.url }}" alt="Kitchen Menu" style="max-width: 100%;">
+    </section>
+  {% endif %}
+
+  <!-- Instagram Feed -->
+  <section>
+    <h2 style="padding:1rem">Latest Instagram Posts</h2>
+    <div class="elfsight-app-1ee85006-7ad8-4898-94a9-66301cbc9ea3" data-elfsight-app-lazy></div>
+  </section>
+{% endblock %}
+
+{% block extra_scripts %}
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper('.mySwiper', {
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 10,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+  });
+</script>
+
+
+  <!-- Instagram Embed Script -->
+  <script src="https://static.elfsight.com/platform/platform.js" async></script>
+{% endblock %}
