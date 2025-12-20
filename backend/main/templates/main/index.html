@@ -64,24 +64,32 @@
   <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-  const swiper = new Swiper('.mySwiper', {
-    loop: true,
-    slidesPerView: 1,
-    spaceBetween: 10,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-    },
-  });
+  // Prevent accidental double-init
+  if (!window.__swiperInitialized) {
+    window.__swiperInitialized = true;
+
+    const slideCount = document.querySelectorAll('.mySwiper .swiper-slide').length;
+
+    new Swiper('.mySwiper', {
+      loop: slideCount >= 3,  // ✅ loop only if 3+ slides
+      slidesPerView: 1,
+      spaceBetween: 10,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      autoplay: slideCount >= 2 ? {
+        delay: 5000,
+        disableOnInteraction: false,
+      } : false,
+    });
+  }
 </script>
+
 
 
   <!-- Instagram Embed Script -->
