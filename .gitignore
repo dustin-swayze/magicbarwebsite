@@ -2,3 +2,7 @@
 __pycache__/
 *.pyc
 *.sqlite3.env
+certbot/
+backend/media/
+backend/staticfiles/
+*.sqlite3
