@@ -20,15 +20,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-5s9b1qsq0mwvyt=nq!fln^1(^kppxf&nh070dt$_v@2bl-%9@#'
-SECRET_KEY = os.environ.get('django-insecure-5s9b1qsq0mwvyt=nq!fln^1(^kppxf&nh070dt$_v@2bl-%9@#', "fallback-secret-key")
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "fallback-secret-key")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DJANGO_DEBUG", "0") == "1"
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [h.strip() for h in os.getenv("ALLOWED_HOSTS", "").split(",") if h.strip()]
+if DEBUG and not ALLOWED_HOSTS:
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+
+# If behind a reverse proxy with HTTPS termination (common on EC2)
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+USE_X_FORWARDED_HOST = True
+
+# CSRF trusted origins (needed for admin login over HTTPS)
+_csrf_hosts = [h for h in ALLOWED_HOSTS if h not in ["localhost", "127.0.0.1"]]
+CSRF_TRUSTED_ORIGINS = [f"https://{h}" for h in _csrf_hosts] + [f"http://{h}" for h in _csrf_hosts]
+
+
 
 
 # Application definition
@@ -137,7 +145,11 @@ INSTAGRAM_TOKEN = os.getenv("INSTAGRAM_ACCESS_TOKEN")
 
 # This handles the emailing of a contact form submission to the appropriate email 
 # Currently Unfilled
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # for testing
+EMAIL_BACKEND = os.getenv(
+    "EMAIL_BACKEND",
+    "django.core.mail.backends.console.EmailBackend" if DEBUG else "django.core.mail.backends.smtp.EmailBackend"
+)
+
 DEFAULT_FROM_EMAIL = 'webmaster@localhost'
 EMAIL_HOST = 'smtp.yourprovider.com'
 EMAIL_PORT = 587
