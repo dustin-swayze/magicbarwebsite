@@ -24,8 +24,8 @@
         <a href="/">Home</a>
 
         <div class="dropdown">
-          <button class="dropbtn" type="button">Menus ▾</button>
-          <div class="dropdown-content">
+          <button class="dropbtn" type="button"onclick="toggleDropdown(event)">Menus ▾</button>
+          <div class="dropdown-content" id="dropdown-menus">
             <a href="/bar-menu">Bar Menu</a>
             <a href="/kitchen-menu">Kitchen Menu</a>
           </div>
@@ -103,9 +103,41 @@
   <script>
   function toggleNav() {
     const links = document.getElementById("nav-links");
-    links.classList.toggle("show");
+    links.classList.toggle("open");
   }
+
+  function toggleDropdown(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const dd = document.getElementById("dropdown-menus");
+    dd.classList.toggle("open");
+  }
+
+  // Close menu when tapping outside (mobile-friendly)
+  document.addEventListener("click", (e) => {
+    const navLinks = document.getElementById("nav-links");
+    const dropdown = document.getElementById("dropdown-menus");
+    const navbar = document.querySelector(".navbar");
+
+    if (!navbar.contains(e.target)) {
+      navLinks?.classList.remove("open");
+      dropdown?.classList.remove("open");
+    }
+  });
+
+  // Optional: close menu after clicking a link (nice UX on mobile)
+  document.addEventListener("DOMContentLoaded", () => {
+    const navLinks = document.getElementById("nav-links");
+    navLinks?.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        const dropdown = document.getElementById("dropdown-menus");
+        dropdown?.classList.remove("open");
+      });
+    });
+  });
 </script>
+
 
 <script>
   const SOCIAL = {
