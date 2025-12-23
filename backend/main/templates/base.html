@@ -55,39 +55,39 @@
   <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-left">
-      © {{ now.year }} Magic Bar
+      © {{ now.year }} Little Magic Bar - Johnson City, TN
     </div>
 
     <div class="footer-right">
       <span class="footer-label">Follow us:</span>
 
+      <!-- Instagram -->
       <a class="social-link"
-         href="https://instagram.com/littlemagicbarjc"
+         href="https://www.instagram.com/littlemagicbarjc"
          data-app="instagram"
          aria-label="Instagram">
-        <!-- Instagram icon (simple SVG) -->
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.2-2.2a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
         </svg>
         Instagram
       </a>
 
+      <!-- TikTok -->
       <a class="social-link"
          href="https://www.tiktok.com/@littlemagicjc"
          data-app="tiktok"
          aria-label="TikTok">
-        <!-- TikTok icon (simple SVG-ish note icon) -->
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M14 3c1.2 2.2 2.9 3.6 5 3.9V9c-2.1-.1-3.8-.9-5-2v7.2a5.2 5.2 0 1 1-5.2-5.2c.4 0 .8 0 1.2.1V11a3.2 3.2 0 1 0 2 3V3h2z"/>
         </svg>
         TikTok
       </a>
 
+      <!-- Facebook -->
       <a class="social-link"
          href="https://www.facebook.com/profile.php?id=61559020913366"
          data-app="facebook"
          aria-label="Facebook">
-        <!-- Facebook icon -->
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M13.5 22v-8h2.7l.4-3h-3.1V9c0-.9.3-1.5 1.6-1.5h1.7V4.8c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v1.8H7.2v3h2.6v8h3.7z"/>
         </svg>
@@ -99,6 +99,7 @@
 
 
 
+
   <script>
   function toggleNav() {
     const links = document.getElementById("nav-links");
@@ -107,45 +108,74 @@
 </script>
 
 <script>
-  function openSocial(app, e) {
-    if (e) e.preventDefault();
+  const SOCIAL = {
+    instagram: {
+      app: "instagram://user?username=littlemagicbarjc",
+      web: "https://www.instagram.com/littlemagicbarjc"
+    },
+    tiktok: {
+      app: "tiktok://user/@littlemagicjc",
+      web: "https://www.tiktok.com/@littlemagicjc"
+    },
+    facebook: {
+      // For profile URLs, fb://profile/<numeric_id> is best:
+      app: "fb://profile/61559020913366",
+      web: "https://www.facebook.com/profile.php?id=61559020913366"
+    }
+  };
 
-    const links = {
-      instagram: {
-        app: "instagram://user?username=littlemagicbarjc",
-        web: "https://instagram.com/littlemagicbarjc"
-      },
-      tiktok: {
-        // TikTok deep links are less consistent across devices; this is a decent attempt.
-        app: "tiktok://user/@littlemagicbarjc",
-        web: "https://www.tiktok.com/@littlemagicjc"
-      },
-      facebook: {
-        // If you know your numeric page id, fb://page/<ID> is better.
-        app: "fb://profile/littlemagicbarjc",
-        web: "https://www.facebook.com/profile.php?id=61559020913366"
-      }
-    };
-
-    const target = links[app];
-    if (!target) return;
-
-    // Try app first
-    window.location = target.app;
-
-    // Fallback to web if app isn't installed
-    setTimeout(() => {
-      window.location = target.web;
-    }, 800);
+  function isMobileDevice() {
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   }
 
-  // Wire up all footer links with data-app
+  function openSocial(appKey, e) {
+    const target = SOCIAL[appKey];
+    if (!target) return;
+
+    // Desktop: let the normal href navigate
+    if (!isMobileDevice()) return;
+
+    // Mobile: intercept and attempt app deep link
+    if (e) e.preventDefault();
+
+    let fallbackTimer = null;
+
+    const cancelFallback = () => {
+      if (fallbackTimer) {
+        clearTimeout(fallbackTimer);
+        fallbackTimer = null;
+      }
+      document.removeEventListener("visibilitychange", onVisChange);
+      window.removeEventListener("pagehide", cancelFallback);
+      window.removeEventListener("blur", cancelFallback);
+    };
+
+    const onVisChange = () => {
+      // If the app opened, the page typically becomes hidden
+      if (document.hidden) cancelFallback();
+    };
+
+    document.addEventListener("visibilitychange", onVisChange);
+    window.addEventListener("pagehide", cancelFallback);
+    window.addEventListener("blur", cancelFallback);
+
+    // Try app
+    window.location.href = target.app;
+
+    // Fallback to web ONLY if app didn't open
+    fallbackTimer = setTimeout(() => {
+      window.location.href = target.web;
+      cancelFallback();
+    }, 900);
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("a[data-app]").forEach(a => {
       a.addEventListener("click", (e) => openSocial(a.dataset.app, e));
     });
   });
 </script>
+
 
 
 
