@@ -37,3 +37,26 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.email}) - {self.submitted_at.strftime('%Y-%m-%d %H:%M')}"
+
+class BusinessHours(models.Model):
+    DAYS = [
+        (0, "Monday"),
+        (1, "Tuesday"),
+        (2, "Wednesday"),
+        (3, "Thursday"),
+        (4, "Friday"),
+        (5, "Saturday"),
+        (6, "Sunday"),
+    ]
+
+    day = models.IntegerField(choices=DAYS, unique=True)
+    is_closed = models.BooleanField(default=False)
+    open_time = models.TimeField(null=True, blank=True)
+    close_time = models.TimeField(null=True, blank=True)
+    notes = models.CharField(max_length=120, blank=True)
+
+    class Meta:
+        ordering = ["day"]
+
+    def __str__(self):
+        return f"{self.get_day_display()} hours"

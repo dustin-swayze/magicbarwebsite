@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CocktailMenuImage, KitchenMenuImage, CarouselImage
+from .models import CocktailMenuImage, KitchenMenuImage, CarouselImage, BusinessHours
 from .models import ContactMessage
 
 @admin.register(CocktailMenuImage)
@@ -38,3 +38,9 @@ class ContactMessageAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'submitted_at')
     readonly_fields = ('name', 'email', 'message', 'submitted_at')
     ordering = ('-submitted_at',)
+
+@admin.register(BusinessHours)
+class BusinessHoursAdmin(admin.ModelAdmin):
+    list_display = ("day", "is_closed", "open_time", "close_time", "notes")
+    list_editable = ("is_closed", "open_time", "close_time", "notes")
+    ordering = ("day",)
