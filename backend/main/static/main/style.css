@@ -1,3 +1,45 @@
+/* =========================
+   0) Theme Variables (Default)
+   ========================= */
+:root {
+  /* Layout */
+  --container-max: 1100px;
+  --container-pad: 24px;
+
+  /* Typography */
+  --font-body: 'Fredoka', system-ui, sans-serif;
+  --font-brand: 'Luckiest Guy', 'Fredoka', cursive;
+  --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Colors */
+  --page-bg-a: #fff0f5;
+  --page-bg-b: #ffe4e1;
+
+  --text-primary: #3c1053;
+  --text-inverse: #ffffff;
+  --menu-text: #222;
+
+  --header-grad-a: #ff69b4;
+  --header-grad-b: #ff8c00;
+
+  --footer-bg: #3c1053;
+
+  /* Effects */
+  --shadow-soft: 0 0 10px rgba(0,0,0,0.20);
+  --shadow-menu: 0 10px 25px rgba(0,0,0,0.20);
+  --shadow-panel: 0 14px 35px rgba(0,0,0,0.25);
+
+  /* Components */
+  --hours-border: rgba(255,255,255,0.15);
+  --hours-divider: rgba(255,255,255,0.10);
+
+  /* Footer sizing (for body padding) */
+  --footer-height: 70px;
+}
+
+/* =========================
+   1) Base Reset / Page
+   ========================= */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,90 +47,96 @@
 }
 
 body {
-  font-family: 'Fredoka', system-ui, sans-serif;
-  background: linear-gradient(to bottom right, #fff0f5, #ffe4e1);
-  color: #3c1053;
+  font-family: var(--font-body);
+  background: linear-gradient(to bottom right, var(--page-bg-a), var(--page-bg-b));
+  color: var(--text-primary);
   line-height: 1.6;
-  padding-bottom: 70px;
+
+  /* Prevent fixed footer overlap */
+  padding-bottom: var(--footer-height);
 }
 
-/* Header */
+/* =========================
+   2) Header + Navbar (Sticky)
+   ========================= */
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background: linear-gradient(to right, var(--header-grad-a), var(--header-grad-b));
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-soft);
   padding: 12px 0;
-  background: linear-gradient(to right, #ff69b4, #ff8c00);
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+
+  position: sticky;
+  top: 0;
+  z-index: 2000;
 }
 
-/* NAV BAR CONTAINER */
 .navbar {
   background: transparent;
   padding: 0;
   position: relative;
 }
 
-/* Hide hamburger on desktop */
-.nav-toggle { display: none; }
-
-/* INNER WRAPPER */
 .nav-inner {
-  max-width: 1100px;
+  max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--container-pad);
 
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* not space-between */
-  gap: 32px;                   /* ✅ guaranteed gap */
+  justify-content: flex-start;
+  gap: 32px;
 }
 
-
-/* Brand: keep it loud and fun */
+/* Brand */
 .nav-brand a {
-  font-family: 'Luckiest Guy', 'Fredoka', cursive;
+  font-family: var(--font-brand);
   font-size: 1.8rem;
   font-weight: 900;
   letter-spacing: 2px;
   text-transform: uppercase;
   text-decoration: none;
-  color: white;
+  color: var(--text-inverse);
   white-space: nowrap;
   text-shadow: 0 2px 0 rgba(0,0,0,0.15);
-
 }
 
-/* LINKS LIST */
+/* Links row */
 .nav-links {
-  margin-left: auto;  /* ✅ pushes links away from brand */
+  margin-left: auto;
   display: flex;
   align-items: center;
   gap: 28px;
 }
 
-
-/* LINKS */
-.nav-links a {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; /* ✅ better readability */
-  text-decoration: none;
+/* Links + dropdown button share styling */
+.nav-links a,
+.dropbtn {
+  font-family: var(--font-ui);
   font-size: 1rem;
-  font-weight: 500;
-  color: white;
-  padding: 6px 4px;
-  transition: opacity 0.2s ease;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+
+  color: var(--text-inverse);
   background: transparent;
   border: none;
   cursor: pointer;
+
+  padding: 8px 6px;
+  text-decoration: none;
+  line-height: 1;
+
+  /* Needed for underline pseudo-element positioning */
+  position: relative;
 }
 
-.nav-links a:hover {
+/* Subtle hover */
+.nav-links a:hover,
+.dropbtn:hover {
   opacity: 0.85;
 }
 
+/* Underline animation */
 .nav-links a::after,
 .dropbtn::after {
   content: "";
@@ -106,97 +154,73 @@ header {
   width: 100%;
 }
 
-/* ✅ Make the dropdown button match the <a> links */
-.dropbtn {
-  color: white;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; /* ✅ better readability */
-  font-size: .95rem;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  padding: 6px 4px;
-  background: transparent;  /* remove button gray */
-  border: none;             /* remove button border */
-  cursor: pointer;
-  position: relative;
-  line-height: 1;
-}
-
-.dropbtn:hover {
-  opacity: 0.85;
-}
-
-/* Dropdown positioning */
+/* Dropdown */
 .dropdown {
   position: relative;
   display: inline-flex;
   align-items: center;
 }
 
-/* Dropdown menu */
 .dropdown-content {
-  display: block;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(8px);
-  transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
   position: absolute;
   top: calc(100% + 10px);
   left: 0;
 
   min-width: 180px;
-  background: white;
-  border-radius: 10px;
+  background: #fff;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  z-index: 1000;
-}
+  box-shadow: var(--shadow-menu);
+  z-index: 2500;
 
-/* Dropdown items */
-.dropdown-content a {
+  /* Animated open */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+
+  /* Keep it in the DOM for animation */
   display: block;
-  color: #222;
-  padding: 10px 12px;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.dropdown-content a:hover {
-  background: rgba(0,0,0,0.06);
 }
 
 .dropdown:hover .dropdown-content {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-
 }
 
-/* Optional: remove ugly focus ring but keep accessibility reasonable */
-.dropbtn:focus {
-  outline: none;
+.dropdown-content a {
+  display: block;
+  color: var(--menu-text);
+  padding: 10px 12px;
+  text-decoration: none;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
+.dropdown-content a:hover {
+  background: rgba(0,0,0,0.06);
+}
+
+/* Hamburger button (hidden on desktop) */
 .nav-toggle {
   display: none;
   background: transparent;
   border: none;
-  color: white;
+  color: var(--text-inverse);
   font-size: 1.6rem;
   cursor: pointer;
 }
 
-/* Desktop stays horizontal */
-@media (min-width: 769px) {
-  .nav-links { display: flex; }
-  .dropdown:hover .dropdown-content {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
+.dropbtn:focus {
+  outline: none;
 }
 
-/* Mobile */
+/* =========================
+   3) Mobile Navbar Panel
+   ========================= */
 @media (max-width: 768px) {
   .nav-toggle {
     display: inline-flex;
@@ -204,9 +228,8 @@ header {
     justify-content: center;
   }
 
-  /* The panel */
   .nav-links {
-    display: none;              /* hidden by default */
+    display: none; /* closed by default */
     position: absolute;
     top: calc(100% + 10px);
     right: 16px;
@@ -219,7 +242,7 @@ header {
     flex-direction: column;
     gap: 10px;
 
-    box-shadow: 0 14px 35px rgba(0,0,0,0.25);
+    box-shadow: var(--shadow-panel);
     z-index: 3000;
   }
 
@@ -230,12 +253,20 @@ header {
   /* Tap-friendly items */
   .nav-links a,
   .dropbtn {
-    color: #222;
-    padding: 12px 12px;       /* bigger tap target */
+    color: var(--menu-text);
+    background: transparent;
+
+    padding: 12px 12px;
     border-radius: 10px;
     text-align: left;
     width: 100%;
     font-weight: 800;
+  }
+
+  /* No underline animation in panel */
+  .nav-links a::after,
+  .dropbtn::after {
+    display: none;
   }
 
   .nav-links a:hover,
@@ -244,21 +275,23 @@ header {
     opacity: 1;
   }
 
-  /* Dropdown inside mobile panel (collapsed by default) */
-  .dropdown { width: 100%; }
+  /* Dropdown inside panel */
+  .dropdown {
+    width: 100%;
+  }
 
   .dropdown-content {
     position: static;
-    box-shadow: none;
-    background: transparent;
-    border-radius: 0;
     min-width: 0;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
 
     opacity: 1;
     visibility: visible;
     transform: none;
 
-    display: none;            /* closed by default on mobile */
+    display: none; /* JS toggles .open */
     padding-left: 8px;
   }
 
@@ -272,29 +305,20 @@ header {
   }
 }
 
+/* Tablet spacing tweaks */
 @media (max-width: 1024px) {
   .nav-links { gap: 18px; }
-  .nav-inner, .navbar { padding-left: 16px; padding-right: 16px; }
+  .nav-inner { padding-left: 16px; padding-right: 16px; }
 }
 
+/* Smaller phones: scale down brand */
 @media (max-width: 480px) {
-  .nav-brand { font-size: 1.3rem; }
+  .nav-brand a { font-size: 1.3rem; }
 }
 
-
-
-
-
-
-
-
-/* This class will be toggled by JS */
-.nav-links.open {
-  display: flex;
-}
-
-
-/* Swiper Carousel */
+/* =========================
+   4) Swiper Carousel
+   ========================= */
 .swiper {
   width: 100%;
   max-width: 100%;
@@ -324,25 +348,16 @@ header {
   border-radius: 12px;
 }
 
-
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 1rem;
-  background: #3c1053;
-  color: white;
-  font-size: 0.9rem;
-  margin-top: 3rem;
-}
-
+/* =========================
+   5) Hours Block
+   ========================= */
 .hours-block {
   padding: 16px;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid var(--hours-border);
   border-radius: 12px;
   max-width: 520px;
-  margin: 24px auto;    /* centers horizontally */
-  text-align: center;   /* centers the title + link */
+  margin: 24px auto;
+  text-align: center;
 }
 
 .hours-list {
@@ -356,7 +371,7 @@ footer {
   justify-content: space-between;
   gap: 12px;
   padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid var(--hours-divider);
 }
 
 .hours-row:last-child {
@@ -364,30 +379,22 @@ footer {
 }
 
 .hours-row .day {
-  font-weight: 600;
+  font-weight: 700;
   min-width: 110px;
 }
 
 .hours-row .notes {
-  opacity: 0.8;
+  opacity: 0.85;
   font-size: 0.9em;
 }
 
-/* Center the admin link nicely */
 .hours-admin-link {
   margin-top: 12px;
 }
 
-
-header, .navbar {
-  position: sticky;
-  top: 0;
-  z-index: 2000;
-}
-
-
-
-/* Fixed sticky footer (always visible) */
+/* =========================
+   6) Fixed Footer (Sticky on Scroll)
+   ========================= */
 .site-footer {
   position: fixed;
   left: 0;
@@ -395,22 +402,17 @@ header, .navbar {
   bottom: 0;
   z-index: 3000;
 
-  background: #3c1053;
-  color: white;
+  background: var(--footer-bg);
+  color: var(--text-inverse);
   padding: 12px 0;
 
   box-shadow: 0 -8px 20px rgba(0,0,0,0.18);
 }
 
-/* Prevent content from being hidden behind the fixed footer */
-body {
-  padding-bottom: 70px; /* adjust if footer height changes */
-}
-
 .footer-inner {
-  max-width: 1100px;
+  max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--container-pad);
 
   display: flex;
   align-items: center;
@@ -435,7 +437,7 @@ body {
   align-items: center;
   gap: 8px;
 
-  color: white;
+  color: var(--text-inverse);
   text-decoration: none;
   font-weight: 800;
 
@@ -454,7 +456,10 @@ body {
   fill: currentColor;
 }
 
-
+/* =========================
+   7) Optional Floating Button (Mobile Only)
+   (If you removed the floating button HTML, you can delete this block)
+   ========================= */
 .floating-social {
   position: fixed;
   right: 14px;
@@ -471,19 +476,17 @@ body {
   box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 }
 
-/* Only show on smaller screens */
 @media (min-width: 900px) {
   .floating-social { display: none; }
 }
 
-
-
-/* Give the Instagram section breathing room so fixed footer doesn't overlap it */
+/* =========================
+   8) Instagram Section + Elfsight Stabilizers
+   ========================= */
 .instagram-section {
-  padding-bottom: 120px; /* more than your footer height */
+  padding-bottom: 120px; /* breathing room so fixed footer doesn't overlap it */
 }
 
-/* Force Elfsight widget container to behave like normal content */
 .elfsight-app-1ee85006-7ad8-4898-94a9-66301cbc9ea3 {
   position: static !important;
   transform: none !important;

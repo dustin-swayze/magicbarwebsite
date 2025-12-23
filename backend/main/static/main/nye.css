@@ -1,0 +1,29 @@
+/* =========================
+   🎉 NYE Theme Overrides
+   ========================= */
+:root {
+  --header-grad-a: #111827;
+  --header-grad-b: #4c1d95;
+
+  --page-bg-a: #0b0b14;
+  --page-bg-b: #1a0f2e;
+
+  --text-primary: #f8f7ff;
+
+  --footer-bg: #0b0b14;
+
+  --hours-border: rgba(255, 215, 0, 0.40);
+  --hours-divider: rgba(255, 215, 0, 0.18);
+}
+
+/* tasteful NYE glow */
+header,
+.hours-block,
+.site-footer {
+  box-shadow: 0 0 24px rgba(255, 215, 0, 0.14);
+}
+
+.nav-links a,
+.dropbtn {
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.35);
+}
