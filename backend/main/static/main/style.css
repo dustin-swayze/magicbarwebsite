@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Comic Sans MS', 'Brush Script MT', cursive, sans-serif;
+  font-family: 'Fredoka', system-ui, sans-serif;
   background: linear-gradient(to bottom right, #fff0f5, #ffe4e1);
   color: #3c1053;
   line-height: 1.6;
@@ -45,6 +45,7 @@ header {
 
 /* Brand: keep it loud and fun */
 .nav-brand a {
+  font-family: 'Luckiest Guy', 'Fredoka', cursive;
   font-size: 1.8rem;
   font-weight: 900;
   letter-spacing: 2px;
@@ -53,6 +54,7 @@ header {
   color: white;
   white-space: nowrap;
   text-shadow: 0 2px 0 rgba(0,0,0,0.15);
+
 }
 
 /* LINKS LIST */
