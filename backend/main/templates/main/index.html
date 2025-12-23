@@ -2,7 +2,10 @@
 {% block title %}Home | Magic Bar{% endblock %}
 
 {% block content %}
-  <div class="info">
+
+
+
+  <!-- <div class="info">
     <h2>Bar Hours</h2>
     <ul>
       <li>Mon: Closed</li>
@@ -18,7 +21,7 @@
       <li>Fri–Sat: 4pm – 1am</li>
       <li>Sun: 2pm – 9pm</li>
     </ul>
-  </div>
+  </div> -->
 
   <!-- Swiper Carousel -->
   <div class="swiper mySwiper">
@@ -35,6 +38,37 @@
   <div class="swiper-button-next"></div>
   <div class="swiper-button-prev"></div>
 </div>
+
+
+<section class="hours-block">
+  <h2>Bar Hours of Operation</h2>
+
+  <ul class="hours-list">
+    {% for h in business_hours %}
+      <li class="hours-row">
+        <span class="day">{{ h.get_day_display }}</span>
+
+        {% if h.is_closed %}
+          <span class="time">Closed</span>
+        {% else %}
+          <span class="time">
+            {{ h.open_time|time:"g:i A" }} – {{ h.close_time|time:"g:i A" }}
+          </span>
+        {% endif %}
+
+        {% if h.notes %}
+          <span class="notes">{{ h.notes }}</span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% if user.is_authenticated %}
+    <p class="hours-admin-link">
+      <a href="/admin/main/businesshours/">Edit Hours</a>
+    </p>
+  {% endif %}
+</section>
 
 
   <!-- Cocktail Menu -->

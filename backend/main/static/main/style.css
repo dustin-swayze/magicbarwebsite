@@ -16,7 +16,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 12px 0;
   background: linear-gradient(to right, #ff69b4, #ff8c00);
   color: white;
   font-size: 1.5rem;
@@ -24,106 +24,220 @@ header {
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
-/* Nav Bar */
+/* NAV BAR CONTAINER */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 1rem;
   background: transparent;
+  padding: 0;
 }
 
-.nav-brand {
-  font-family: 'Pacifico', cursive;
-  font-size: 1.8rem;
-  color: white;
-}
+/* INNER WRAPPER */
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
 
-.nav-links {
   display: flex;
-  gap: 1.5rem;
+  align-items: center;
+  justify-content: flex-start; /* not space-between */
+  gap: 32px;                   /* ✅ guaranteed gap */
 }
 
-.nav-links a,
+
+/* Brand: keep it loud and fun */
+.nav-brand a {
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: white;
+  white-space: nowrap;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.15);
+}
+
+/* LINKS LIST */
+.nav-links {
+  margin-left: auto;  /* ✅ pushes links away from brand */
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+
+/* LINKS */
+.nav-links a {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; /* ✅ better readability */
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+  padding: 6px 4px;
+  transition: opacity 0.2s ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-links a:hover {
+  opacity: 0.85;
+}
+
+.nav-links a::after,
+.dropbtn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background: rgba(255,255,255,0.9);
+  transition: width 160ms ease;
+}
+
+.nav-links a:hover::after,
+.dropbtn:hover::after {
+  width: 100%;
+}
+
+/* ✅ Make the dropdown button match the <a> links */
 .dropbtn {
   color: white;
-  background: none;
-  border: none;
-  font-size: 1.1rem;
-  text-decoration: none;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; /* ✅ better readability */
+  font-size: .95rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 6px 4px;
+  background: transparent;  /* remove button gray */
+  border: none;             /* remove button border */
   cursor: pointer;
-  font-weight: bold;
-  transition: transform 0.2s;
+  position: relative;
+  line-height: 1;
 }
 
-.nav-links a:hover,
 .dropbtn:hover {
-  transform: scale(1.1);
-  text-shadow: 0 0 5px #fff;
+  opacity: 0.85;
 }
 
-/* Dropdown */
+/* Dropdown positioning */
 .dropdown {
   position: relative;
+  display: inline-flex;
+  align-items: center;
 }
 
+/* Dropdown menu */
 .dropdown-content {
-  display: none;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
   position: absolute;
-  background-color: #ffa07a;
-  min-width: 160px;
-  z-index: 1;
-  top: 100%;
-  border-radius: 0 0 8px 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  top: calc(100% + 10px);
+  left: 0;
+
+  min-width: 180px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  z-index: 1000;
 }
 
+/* Dropdown items */
 .dropdown-content a {
-  color: white;
-  padding: 0.75rem 1rem;
-  text-decoration: none;
   display: block;
-  font-weight: bold;
+  color: #222;
+  padding: 10px 12px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.dropdown-content a:hover {
+  background: rgba(0,0,0,0.06);
 }
 
 .dropdown:hover .dropdown-content {
-  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+
 }
 
-/* Responsive Nav */
+/* Optional: remove ugly focus ring but keep accessibility reasonable */
+.dropbtn:focus {
+  outline: none;
+}
+
 .nav-toggle {
   display: none;
-  font-size: 1.5rem;
-  background: none;
-  color: white;
+  background: transparent;
   border: none;
+  color: white;
+  font-size: 1.6rem;
   cursor: pointer;
 }
 
+/* Mobile layout */
 @media (max-width: 768px) {
-  .nav-toggle {
-    display: block;
-  }
+  .nav-toggle { display: block; }
 
   .nav-links {
     display: none;
+    position: absolute;
+    top: 64px;         /* adjust if your navbar height differs */
+    right: 16px;
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
     flex-direction: column;
-    width: 100%;
-    background: #ff69b4;
-    margin-top: 1rem;
-    border-radius: 0 0 8px 8px;
+    gap: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 2500;
   }
 
-  .nav-links.show {
-    display: flex;
+  .nav-links a,
+  .dropbtn {
+    color: #222;
+    padding: 8px 10px;
+    text-align: left;
   }
 
+  /* Make dropdown menu relative on mobile */
   .dropdown-content {
-    position: static;
-    background: #ff7f50;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  display: none;
+}
+
+  .dropdown:hover .dropdown-content {
+    display: block;
   }
 }
+
+@media (max-width: 1024px) {
+  .nav-links { gap: 18px; }
+  .nav-inner, .navbar { padding-left: 16px; padding-right: 16px; }
+}
+
+@media (max-width: 480px) {
+  .nav-brand { font-size: 1.3rem; }
+}
+
+
+
+
+
+
+
+
+/* This class will be toggled by JS */
+.nav-links.open {
+  display: flex;
+}
+
 
 /* Swiper Carousel */
 .swiper {
@@ -166,3 +280,53 @@ footer {
   font-size: 0.9rem;
   margin-top: 3rem;
 }
+
+.hours-block {
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  max-width: 520px;
+  margin: 24px auto;    /* centers horizontally */
+  text-align: center;   /* centers the title + link */
+}
+
+.hours-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0 0;
+}
+
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.hours-row:last-child {
+  border-bottom: none;
+}
+
+.hours-row .day {
+  font-weight: 600;
+  min-width: 110px;
+}
+
+.hours-row .notes {
+  opacity: 0.8;
+  font-size: 0.9em;
+}
+
+/* Center the admin link nicely */
+.hours-admin-link {
+  margin-top: 12px;
+}
+
+
+header, .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+}
+

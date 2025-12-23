@@ -10,23 +10,31 @@
 <body>
 
   <header>
-    <div><strong>Little Magic  </strong></div>
-    <nav class="navbar">
-  <div class="nav-brand">Little Magic   </div>
-  <button class="nav-toggle" onclick="toggleNav()">☰</button>
-  <div class="nav-links" id="nav-links">
-    <a href="/">Home</a>
-    <div class="dropdown">
-      <button class="dropbtn">Menus ▾</button>
-      <div class="dropdown-content">
-        <a href="/bar-menu">Bar Menu</a>
-        <a href="/kitchen-menu">Kitchen Menu</a>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <a href="/">LITTLE MAGIC JC</a>
+      </div>
+
+      <button class="nav-toggle" onclick="toggleNav()" type="button">☰</button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="/">Home</a>
+
+        <div class="dropdown">
+          <button class="dropbtn" type="button">Menus ▾</button>
+          <div class="dropdown-content">
+            <a href="/bar-menu">Bar Menu</a>
+            <a href="/kitchen-menu">Kitchen Menu</a>
+          </div>
+        </div>
+
+        <a href="/contact">Contact</a>
       </div>
     </div>
-    <a href="/contact">Contact</a>
-  </div>
-</nav>
-  </header>
+  </nav>
+</header>
+
 
   <main style="padding: 1rem;">
     {% block content %}
@@ -45,6 +53,7 @@
     links.classList.toggle("show");
   }
 </script>
+
 
 {% block extra_scripts %}{% endblock %}
 
