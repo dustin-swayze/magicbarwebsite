@@ -475,3 +475,16 @@ body {
 @media (min-width: 900px) {
   .floating-social { display: none; }
 }
+
+
+
+/* Give the Instagram section breathing room so fixed footer doesn't overlap it */
+.instagram-section {
+  padding-bottom: 120px; /* more than your footer height */
+}
+
+/* Force Elfsight widget container to behave like normal content */
+.elfsight-app-1ee85006-7ad8-4898-94a9-66301cbc9ea3 {
+  position: static !important;
+  transform: none !important;
+}
