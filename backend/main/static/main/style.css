@@ -332,3 +332,77 @@ header, .navbar {
   z-index: 2000;
 }
 
+
+
+.site-footer {
+  background: #3c1053;
+  color: white;
+  padding: 14px 0;
+  margin-top: 3rem;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.footer-label {
+  opacity: 0.9;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 8px 10px;          /* ✅ bigger tap target */
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+}
+
+.social-link:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+.social-link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+
+.floating-social {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 4000;
+}
+
+.floating-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* Only show on smaller screens */
+@media (min-width: 900px) {
+  .floating-social { display: none; }
+}
