@@ -6,6 +6,8 @@ services:
     volumes:
       - ./backend:/app
       - ./media:/app/media
+      - ./data/db.sqlite3:/app/db.sqlite3
+
     ports:
       - "8000:8000"
     env_file:
