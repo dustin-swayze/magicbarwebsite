@@ -60,3 +60,21 @@ class BusinessHours(models.Model):
 
     def __str__(self):
         return f"{self.get_day_display()} hours"
+
+class EventPost(models.Model):
+    title = models.CharField(max_length=120, blank=True)
+    image = models.ImageField(upload_to='events/')
+    caption = models.CharField(max_length=220)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    is_approved = models.BooleanField(default=False)
+    uploaded_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    order = models.PositiveIntegerField(default=0, help_text="Lower shows first")
+
+    class Meta:
+        ordering = ["order", "-uploaded_at"]
+
+    def __str__(self):
+        name = self.title.strip() if self.title else "Event"
+        return f"{name} (order {self.order})"

@@ -491,3 +491,67 @@ header {
   position: static !important;
   transform: none !important;
 }
+
+/* =========================
+   9) Event Frames
+   ========================= */
+
+.events-section {
+  max-width: 1100px;
+  margin: 28px auto;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.events-title {
+  margin-bottom: 14px;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+/* Card already styled earlier; keep it centered within grid */
+.event-card {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.35);
+  border: 2px solid rgba(255,255,255,0.25);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.10);
+}
+
+.event-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;   /* Canva portrait */
+  object-fit: cover;
+  display: block;
+}
+
+.event-body {
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.event-name {
+  margin: 0 0 6px 0;
+  font-size: 1.05rem;
+}
+
+.event-caption {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .events-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .events-grid { grid-template-columns: 1fr; }
+}

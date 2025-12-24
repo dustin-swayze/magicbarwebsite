@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import CocktailMenuImage, KitchenMenuImage, CarouselImage, BusinessHours
-from .models import ContactMessage
+from .models import ContactMessage, EventPost
 
 @admin.register(CocktailMenuImage)
 class CocktailMenuImageAdmin(admin.ModelAdmin):
@@ -44,3 +44,16 @@ class BusinessHoursAdmin(admin.ModelAdmin):
     list_display = ("day", "is_closed", "open_time", "close_time", "notes")
     list_editable = ("is_closed", "open_time", "close_time", "notes")
     ordering = ("day",)
+
+@admin.register(EventPost)
+class EventPostAdmin(admin.ModelAdmin):
+    list_display = ("title", "is_approved", "order", "uploaded_at", "uploaded_by")
+    list_filter = ("is_approved",)
+    search_fields = ("title", "caption")
+    ordering = ("order", "-uploaded_at")
+    list_editable = ("order", "is_approved")  # ✅ edit in the list view
+
+    def save_model(self, request, obj, form, change):
+        if not obj.uploaded_by_id:
+            obj.uploaded_by = request.user
+        super().save_model(request, obj, form, change)
