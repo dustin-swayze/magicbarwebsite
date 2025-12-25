@@ -6,6 +6,8 @@ certbot/
 backend/media/
 backend/staticfiles/
 *.sqlite3
+
+#possibly a problem
 media/
 
 # SQLite DBs (do not commit)
@@ -13,6 +15,6 @@ db.sqlite3
 *.sqlite3
 backend/db.sqlite3media
 
-# uploads / media
+# uploads / media  these are giving me headaches
 media.
 media
