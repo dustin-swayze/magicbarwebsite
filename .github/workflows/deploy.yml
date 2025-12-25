@@ -16,9 +16,10 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/github-deploy
+          chmod 600 ~/.ssh/github-deploy
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
           
       - name: Debug host values (TEMP)
         run: |
@@ -30,9 +31,9 @@ jobs:
           HOST: ${{ secrets.EC2_HOST }}
           USER: ${{ secrets.EC2_USER }}
         run: |
-          echo "Deploying to $USER@$HOST"
-          ssh -o StrictHostKeyChecking=yes "$USER@$HOST" << 'EOF'
+          ssh -i ~/.ssh/github-deploy -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes "$USER@$HOST" << 'EOF'
             cd ~/apps/magicbarwebsite
             git pull
             ./deploy.sh
           EOF
+
