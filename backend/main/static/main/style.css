@@ -555,3 +555,38 @@ header {
 @media (max-width: 560px) {
   .events-grid { grid-template-columns: 1fr; }
 }
+
+
+/* EVENT TICKET LINK */
+/* NYE Ticket CTA */
+.cta-ticket-link{
+  display: inline-block;
+
+  /* spacing from next section */
+  margin-bottom: 32px;
+
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+
+  padding: 14px 18px;
+  border-radius: 999px;
+
+  color: inherit;
+  border: 1px solid currentColor;
+  background: transparent;
+
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+
+.cta-ticket-link:hover{
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.cta-ticket-link:active{
+  transform: translateY(0px);
+  opacity: 0.85;
+}
