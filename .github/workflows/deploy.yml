@@ -26,9 +26,12 @@ jobs:
           echo "EC2_USER='${{ secrets.EC2_USER }}'"
 
       - name: Deploy on EC2
+        env:
+          HOST: ${{ secrets.EC2_HOST }}
+          USER: ${{ secrets.EC2_USER }}
         run: |
-          ssh -o StrictHostKeyChecking=yes \
-              ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+          echo "Deploying to $USER@$HOST"
+          ssh -o StrictHostKeyChecking=yes "$USER@$HOST" << 'EOF'
             cd ~/apps/magicbarwebsite
             git pull
             ./deploy.sh
