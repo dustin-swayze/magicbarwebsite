@@ -19,6 +19,11 @@ jobs:
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+          
+      - name: Debug host values (TEMP)
+        run: |
+          echo "EC2_HOST='${{ secrets.EC2_HOST }}'"
+          echo "EC2_USER='${{ secrets.EC2_USER }}'"
 
       - name: Deploy on EC2
         run: |
