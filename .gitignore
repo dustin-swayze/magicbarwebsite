@@ -6,6 +6,7 @@ certbot/
 backend/media/
 backend/staticfiles/
 *.sqlite3
+media/
 
 # SQLite DBs (do not commit)
 db.sqlite3
