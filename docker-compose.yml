@@ -5,7 +5,7 @@ services:
     container_name: magicbar_backend
     volumes:
       - ./backend:/app
-      - ./media:/app/media
+      - /var/www/magicbar/media:/app/media
       - ./data/db.sqlite3:/app/db.sqlite3
 
     ports:
