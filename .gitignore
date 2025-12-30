@@ -10,10 +10,13 @@ backend/staticfiles/
 #possibly a problem
 media/
 
+#ignore data
+data/
+
 # SQLite DBs (do not commit)
 db.sqlite3
 *.sqlite3
-backend/db.sqlite3media
+backend/db.sqlite3
 
 # uploads / media  these are giving me headaches
 media.
