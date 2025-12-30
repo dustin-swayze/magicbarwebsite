@@ -18,3 +18,5 @@ backend/db.sqlite3media
 # uploads / media  these are giving me headaches
 media.
 media
+
+db.sqlite3
