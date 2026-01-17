@@ -1,5 +1,5 @@
 /* =========================
-   0) Theme Variables (Default)
+   0) Theme Variables (Mustard + Pink)
    ========================= */
 :root {
   /* Layout */
@@ -11,18 +11,33 @@
   --font-brand: 'Luckiest Guy', 'Fredoka', cursive;
   --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
-  /* Colors */
-  --page-bg-a: #fff0f5;
-  --page-bg-b: #ffe4e1;
+  /* Brand Colors */
+  --brand-mustard: #D4A017;
+  --brand-mustard-deep: #B88910;
+  --brand-pink: #E83E8C;
+  --brand-pink-deep: #C92F74;
 
-  --text-primary: #3c1053;
+  /* Page Background */
+  --page-bg-a: #FFF7E6;
+  --page-bg-b: #FFF0F6;
+
+  /* Text */
+  --text-primary: #2B1024;
   --text-inverse: #ffffff;
-  --menu-text: #222;
+  --menu-text: #2B1024;
 
-  --header-grad-a: #ff69b4;
-  --header-grad-b: #ff8c00;
+  /* Surfaces */
+  --surface: #ffffff;
+  --surface-soft: rgba(255,255,255,0.55);
 
-  --footer-bg: #3c1053;
+  /* Borders */
+  --border-soft: rgba(43,16,36,0.14);
+  --border-strong: rgba(43,16,36,0.22);
+
+  /* Header / Footer */
+  --header-grad-a: var(--brand-mustard);
+  --header-grad-b: var(--brand-pink);
+  --footer-bg: #2B1024;
 
   /* Effects */
   --shadow-soft: 0 0 10px rgba(0,0,0,0.20);
@@ -30,10 +45,10 @@
   --shadow-panel: 0 14px 35px rgba(0,0,0,0.25);
 
   /* Components */
-  --hours-border: rgba(255,255,255,0.15);
-  --hours-divider: rgba(255,255,255,0.10);
+  --hours-border: var(--border-soft);
+  --hours-divider: rgba(43,16,36,0.10);
 
-  /* Footer sizing (for body padding) */
+  /* Footer sizing */
   --footer-height: 70px;
 }
 
@@ -51,92 +66,60 @@ body {
   background: linear-gradient(to bottom right, var(--page-bg-a), var(--page-bg-b));
   color: var(--text-primary);
   line-height: 1.6;
-
-  /* Prevent fixed footer overlap */
   padding-bottom: var(--footer-height);
 }
 
 /* =========================
-   2) Header + Navbar (Sticky)
+   2) Header + Navbar
    ========================= */
 header {
   background: linear-gradient(to right, var(--header-grad-a), var(--header-grad-b));
   color: var(--text-inverse);
   box-shadow: var(--shadow-soft);
   padding: 12px 0;
-
   position: sticky;
   top: 0;
   z-index: 2000;
-}
-
-.navbar {
-  background: transparent;
-  padding: 0;
-  position: relative;
 }
 
 .nav-inner {
   max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 var(--container-pad);
-
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   gap: 32px;
 }
 
-/* Brand */
 .nav-brand a {
   font-family: var(--font-brand);
   font-size: 1.8rem;
-  font-weight: 900;
   letter-spacing: 2px;
   text-transform: uppercase;
-  text-decoration: none;
   color: var(--text-inverse);
-  white-space: nowrap;
+  text-decoration: none;
   text-shadow: 0 2px 0 rgba(0,0,0,0.15);
 }
 
-/* Links row */
 .nav-links {
   margin-left: auto;
   display: flex;
-  align-items: center;
   gap: 28px;
 }
 
-/* Links + dropdown button share styling */
 .nav-links a,
 .dropbtn {
   font-family: var(--font-ui);
-  font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 0.8px;
   text-transform: uppercase;
-
   color: var(--text-inverse);
-  background: transparent;
+  background: none;
   border: none;
   cursor: pointer;
-
   padding: 8px 6px;
-  text-decoration: none;
-  line-height: 1;
-
-  /* Needed for underline pseudo-element positioning */
   position: relative;
 }
 
-/* Subtle hover */
-.nav-links a:hover,
-.dropbtn:hover {
-  opacity: 0.85;
-}
-
-/* Underline animation */
 .nav-links a::after,
 .dropbtn::after {
   content: "";
@@ -154,33 +137,25 @@ header {
   width: 100%;
 }
 
-/* Dropdown */
+/* =========================
+   Dropdown
+   ========================= */
 .dropdown {
   position: relative;
-  display: inline-flex;
-  align-items: center;
 }
 
 .dropdown-content {
   position: absolute;
   top: calc(100% + 10px);
-  left: 0;
-
   min-width: 180px;
-  background: #fff;
+  background: var(--surface);
   border-radius: 12px;
-  overflow: hidden;
+  border: 1px solid var(--border-soft);
   box-shadow: var(--shadow-menu);
-  z-index: 2500;
-
-  /* Animated open */
   opacity: 0;
   visibility: hidden;
   transform: translateY(8px);
-  transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
-
-  /* Keep it in the DOM for animation */
-  display: block;
+  transition: all 160ms ease;
 }
 
 .dropdown:hover .dropdown-content {
@@ -191,158 +166,56 @@ header {
 
 .dropdown-content a {
   display: block;
-  color: var(--menu-text);
   padding: 10px 12px;
+  color: var(--menu-text);
   text-decoration: none;
-  font-family: var(--font-ui);
   font-weight: 600;
-  letter-spacing: 0;
-  text-transform: none;
 }
 
 .dropdown-content a:hover {
-  background: rgba(0,0,0,0.06);
-}
-
-/* Hamburger button (hidden on desktop) */
-.nav-toggle {
-  display: none;
-  background: transparent;
-  border: none;
-  color: var(--text-inverse);
-  font-size: 1.6rem;
-  cursor: pointer;
-}
-
-.dropbtn:focus {
-  outline: none;
+  background: rgba(232,62,140,0.08);
 }
 
 /* =========================
-   3) Mobile Navbar Panel
+   Mobile Nav
    ========================= */
 @media (max-width: 768px) {
-  .nav-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   .nav-links {
-    display: none; /* closed by default */
+    display: none;
     position: absolute;
-    top: calc(100% + 10px);
     right: 16px;
-
+    top: calc(100% + 10px);
     width: min(92vw, 320px);
-    background: rgba(255,255,255,0.96);
+    background: rgba(255,247,230,0.97);
     border-radius: 14px;
     padding: 12px;
-
     flex-direction: column;
-    gap: 10px;
-
     box-shadow: var(--shadow-panel);
-    z-index: 3000;
+    border: 1px solid var(--border-soft);
   }
 
   .nav-links.open {
     display: flex;
   }
 
-  /* Tap-friendly items */
   .nav-links a,
   .dropbtn {
     color: var(--menu-text);
-    background: transparent;
-
-    padding: 12px 12px;
+    padding: 12px;
     border-radius: 10px;
-    text-align: left;
-    width: 100%;
-    font-weight: 800;
-  }
-
-  /* No underline animation in panel */
-  .nav-links a::after,
-  .dropbtn::after {
-    display: none;
   }
 
   .nav-links a:hover,
   .dropbtn:hover {
-    background: rgba(0,0,0,0.06);
-    opacity: 1;
+    background: rgba(212,160,23,0.12);
   }
-
-  /* Dropdown inside panel */
-  .dropdown {
-    width: 100%;
-  }
-
-  .dropdown-content {
-    position: static;
-    min-width: 0;
-    background: transparent;
-    box-shadow: none;
-    border-radius: 0;
-
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-
-    display: none; /* JS toggles .open */
-    padding-left: 8px;
-  }
-
-  .dropdown-content.open {
-    display: block;
-  }
-
-  .dropdown-content a {
-    padding: 10px 12px;
-    border-radius: 10px;
-  }
-}
-
-/* Tablet spacing tweaks */
-@media (max-width: 1024px) {
-  .nav-links { gap: 18px; }
-  .nav-inner { padding-left: 16px; padding-right: 16px; }
-}
-
-/* Smaller phones: scale down brand */
-@media (max-width: 480px) {
-  .nav-brand a { font-size: 1.3rem; }
 }
 
 /* =========================
-   4) Swiper Carousel
+   4) Carousel
    ========================= */
-.swiper {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  margin: 1rem auto;
-  position: relative;
-  overflow: hidden;
-}
-
-.swiper-wrapper {
-  display: flex;
-}
-
-.swiper-slide {
-  flex-shrink: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .swiper-slide img {
   width: 100%;
-  height: auto;
   max-height: 500px;
   object-fit: cover;
   border-radius: 12px;
@@ -360,233 +233,52 @@ header {
   text-align: center;
 }
 
-.hours-list {
-  list-style: none;
-  padding: 0;
-  margin: 12px 0 0 0;
-}
-
-.hours-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--hours-divider);
-}
-
-.hours-row:last-child {
-  border-bottom: none;
-}
-
-.hours-row .day {
-  font-weight: 700;
-  min-width: 110px;
-}
-
-.hours-row .notes {
-  opacity: 0.85;
-  font-size: 0.9em;
-}
-
-.hours-admin-link {
-  margin-top: 12px;
-}
-
 /* =========================
-   6) Fixed Footer (Sticky on Scroll)
+   6) Footer
    ========================= */
 .site-footer {
   position: fixed;
-  left: 0;
-  right: 0;
   bottom: 0;
-  z-index: 3000;
-
+  width: 100%;
   background: var(--footer-bg);
   color: var(--text-inverse);
   padding: 12px 0;
-
   box-shadow: 0 -8px 20px rgba(0,0,0,0.18);
 }
 
-.footer-inner {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 0 var(--container-pad);
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.footer-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.footer-label {
-  opacity: 0.9;
-}
-
-.social-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-
-  color: var(--text-inverse);
-  text-decoration: none;
-  font-weight: 800;
-
-  padding: 8px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.12);
-}
-
-.social-link:hover {
-  background: rgba(255,255,255,0.18);
-}
-
-.social-link svg {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-}
-
 /* =========================
-   7) Optional Floating Button (Mobile Only)
-   (If you removed the floating button HTML, you can delete this block)
+   7) Events
    ========================= */
-.floating-social {
-  position: fixed;
-  right: 14px;
-  bottom: 14px;
-  z-index: 4000;
-}
-
-.floating-btn {
-  border: none;
-  border-radius: 999px;
-  padding: 12px 14px;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-}
-
-@media (min-width: 900px) {
-  .floating-social { display: none; }
-}
-
-/* =========================
-   8) Instagram Section + Elfsight Stabilizers
-   ========================= */
-.instagram-section {
-  padding-bottom: 120px; /* breathing room so fixed footer doesn't overlap it */
-}
-
-.elfsight-app-1ee85006-7ad8-4898-94a9-66301cbc9ea3 {
-  position: static !important;
-  transform: none !important;
-}
-
-/* =========================
-   9) Event Frames
-   ========================= */
-
-.events-section {
-  max-width: 1100px;
-  margin: 28px auto;
-  padding: 0 16px;
-  text-align: center;
-}
-
-.events-title {
-  margin-bottom: 14px;
-}
-
-.events-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  align-items: start;
-}
-
-/* Card already styled earlier; keep it centered within grid */
 .event-card {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 420px;
+  background: var(--surface-soft);
+  border: 2px solid rgba(212,160,23,0.22);
   border-radius: 16px;
-  overflow: hidden;
-  background: rgba(255,255,255,0.35);
-  border: 2px solid rgba(255,255,255,0.25);
   box-shadow: 0 10px 25px rgba(0,0,0,0.10);
 }
 
-.event-img {
-  width: 100%;
-  aspect-ratio: 4 / 5;   /* Canva portrait */
-  object-fit: cover;
-  display: block;
-}
-
-.event-body {
-  padding: 12px 14px;
-  text-align: left;
-}
-
 .event-name {
-  margin: 0 0 6px 0;
-  font-size: 1.05rem;
+  color: var(--brand-pink-deep);
 }
 
-.event-caption {
-  margin: 0;
-  font-weight: 600;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .events-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 560px) {
-  .events-grid { grid-template-columns: 1fr; }
-}
-
-
-/* EVENT TICKET LINK */
-/* NYE Ticket CTA */
-.cta-ticket-link{
+/* =========================
+   8) Ticket CTA
+   ========================= */
+.cta-ticket-link {
   display: inline-block;
-
-  /* spacing from next section */
   margin-bottom: 32px;
-
-  text-decoration: none;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 700;
-
   padding: 14px 18px;
   border-radius: 999px;
-
-  color: inherit;
-  border: 1px solid currentColor;
-  background: transparent;
-
+  text-transform: uppercase;
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--text-primary);
+  background: linear-gradient(to right, var(--brand-mustard), var(--brand-pink));
+  border: 2px solid var(--brand-mustard-deep);
+  box-shadow: var(--shadow-soft);
   transition: transform 120ms ease, opacity 120ms ease;
 }
 
-
-.cta-ticket-link:hover{
+.cta-ticket-link:hover {
   transform: translateY(-1px);
-  opacity: 0.9;
-}
-
-.cta-ticket-link:active{
-  transform: translateY(0px);
-  opacity: 0.85;
+  opacity: 0.95;
 }
