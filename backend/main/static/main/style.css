@@ -1,5 +1,5 @@
 /* =========================
-   0) Theme Variables (Mustard + Pink, Mustard-forward)
+   0) Theme Variables (70s / Disco / Retro — Pink-forward)
    ========================= */
 :root {
   /* Layout */
@@ -12,46 +12,45 @@
   --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
   /* =========================
-     Color System (Mustard + Pink)
+     Retro Palette (Pink primary, Mustard secondary)
      ========================= */
+  --pink: #FF4FB2;          /* hot disco pink */
+  --pink-deep: #D81B7D;     /* deeper pink for accents */
+  --mustard: #D9A21B;       /* warm mustard */
+  --mustard-deep: #B88410;  /* deeper mustard */
+  --plum: #3C1053;          /* retro plum (your original) */
+  --cream: #FFF3DF;         /* warm cream */
+  --peach: #FFE1D6;         /* warm peachy light */
+  --surface: #FFFFFF;
 
-  /* Brand */
-  --brand-mustard: #D4A017;
-  --brand-mustard-bright: #E2B42C;
-  --brand-mustard-deep: #A97C0F;
-  --brand-pink: #E83E8C;
-  --brand-pink-deep: #C92F74;
-
-  /* Page */
-  --page-bg-a: #FFF6DE; /* warmer cream */
-  --page-bg-b: #FFEFD0; /* mustard-tinted cream */
+  /* Page background */
+  --page-bg-a: #FFF0F6;     /* soft pink */
+  --page-bg-b: #FFE8D1;     /* peach */
 
   /* Text */
-  --text-primary: #2B1024; /* deep plum */
+  --text-primary: var(--plum);
   --text-inverse: #ffffff;
   --menu-text: #2B1024;
 
-  /* Surfaces */
-  --surface: #ffffff;
-  --surface-soft: rgba(255,246,222,0.75); /* warm cream surface */
+  /* Header gradient (pink-forward) */
+  --header-grad-a: var(--pink);
+  --header-grad-b: var(--mustard);
 
-  /* Borders / dividers */
-  --border-soft: rgba(43,16,36,0.14);
-  --border-strong: rgba(43,16,36,0.22);
+  /* Footer */
+  --footer-bg: var(--plum);
 
-  /* Header / footer */
-  --header-grad-a: var(--brand-mustard-bright);
-  --header-grad-b: var(--brand-mustard);
-  --footer-bg: #2B1024;
+  /* Effects (retro depth) */
+  --shadow-soft: 0 10px 24px rgba(0,0,0,0.16);
+  --shadow-menu: 0 18px 45px rgba(0,0,0,0.22);
+  --shadow-panel: 0 18px 55px rgba(0,0,0,0.25);
 
-  /* Effects */
-  --shadow-soft: 0 0 10px rgba(0,0,0,0.20);
-  --shadow-menu: 0 10px 25px rgba(0,0,0,0.20);
-  --shadow-panel: 0 14px 35px rgba(0,0,0,0.25);
+  /* Disco glow (subtle; used sparingly) */
+  --glow-pink: 0 10px 28px rgba(255,79,178,0.22);
+  --glow-mustard: 0 12px 30px rgba(217,162,27,0.20);
 
   /* Components */
-  --hours-border: var(--border-soft);
-  --hours-divider: rgba(43,16,36,0.10);
+  --hours-border: rgba(60,16,83,0.18);
+  --hours-divider: rgba(60,16,83,0.10);
 
   /* Footer sizing (for body padding) */
   --footer-height: 70px;
@@ -68,7 +67,14 @@
 
 body {
   font-family: var(--font-body);
-  background: linear-gradient(to bottom right, var(--page-bg-a), var(--page-bg-b));
+
+  /* Disco background: pink-forward with warm mustard highlights */
+  background:
+    radial-gradient(1000px 650px at 18% 12%, rgba(255,79,178,0.26), transparent 58%),
+    radial-gradient(900px 600px at 82% 18%, rgba(217,162,27,0.18), transparent 60%),
+    radial-gradient(900px 640px at 20% 88%, rgba(255,79,178,0.14), transparent 62%),
+    linear-gradient(to bottom right, var(--page-bg-a), var(--page-bg-b));
+
   color: var(--text-primary);
   line-height: 1.6;
 
@@ -82,7 +88,13 @@ body {
 header {
   background: linear-gradient(to right, var(--header-grad-a), var(--header-grad-b));
   color: var(--text-inverse);
-  box-shadow: var(--shadow-soft);
+
+  /* Retro depth + glow */
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.14),
+    var(--glow-pink),
+    var(--glow-mustard);
+
   padding: 12px 0;
 
   position: sticky;
@@ -117,7 +129,12 @@ header {
   text-decoration: none;
   color: var(--text-inverse);
   white-space: nowrap;
-  text-shadow: 0 2px 0 rgba(0,0,0,0.15);
+
+  /* Disco pop (subtle layered shadow) */
+  text-shadow:
+    0 2px 0 rgba(0,0,0,0.16),
+    0 10px 24px rgba(255,79,178,0.22),
+    0 12px 26px rgba(217,162,27,0.16);
 }
 
 /* Links row */
@@ -133,8 +150,8 @@ header {
 .dropbtn {
   font-family: var(--font-ui);
   font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.8px;
+  font-weight: 800;
+  letter-spacing: 0.9px;
   text-transform: uppercase;
 
   color: var(--text-inverse);
@@ -153,10 +170,10 @@ header {
 /* Subtle hover */
 .nav-links a:hover,
 .dropbtn:hover {
-  opacity: 0.92;
+  opacity: 0.9;
 }
 
-/* Underline animation */
+/* Underline animation (pink-forward) */
 .nav-links a::after,
 .dropbtn::after {
   content: "";
@@ -166,7 +183,7 @@ header {
   width: 0%;
   height: 2px;
   background: rgba(255,255,255,0.92);
-  box-shadow: 0 2px 0 rgba(212,160,23,0.60);
+  box-shadow: 0 2px 0 rgba(255,79,178,0.70);
   transition: width 160ms ease;
 }
 
@@ -189,10 +206,16 @@ header {
 
   min-width: 180px;
   background: var(--surface);
-  border: 1px solid var(--border-soft);
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: var(--shadow-menu);
+
+  /* Retro border and shadow */
+  border: 2px solid rgba(255,79,178,0.18);
+  box-shadow:
+    var(--shadow-menu),
+    0 18px 45px rgba(255,79,178,0.12),
+    0 18px 45px rgba(217,162,27,0.10);
+
   z-index: 2500;
 
   /* Animated open */
@@ -223,7 +246,7 @@ header {
 }
 
 .dropdown-content a:hover {
-  background: rgba(212,160,23,0.14); /* mustard tint */
+  background: rgba(255,79,178,0.10);
 }
 
 /* Hamburger button (hidden on desktop) */
@@ -257,15 +280,20 @@ header {
     right: 16px;
 
     width: min(92vw, 320px);
-    background: rgba(255,246,222,0.97); /* warm cream */
-    border: 1px solid rgba(212,160,23,0.25);
-    border-radius: 14px;
+
+    /* Pink-forward panel with warm undertone */
+    background: rgba(255,243,223,0.98);
+    border-radius: 16px;
     padding: 12px;
 
     flex-direction: column;
     gap: 10px;
 
-    box-shadow: var(--shadow-panel);
+    border: 2px solid rgba(255,79,178,0.18);
+    box-shadow:
+      var(--shadow-panel),
+      0 18px 45px rgba(255,79,178,0.12);
+
     z-index: 3000;
   }
 
@@ -280,7 +308,7 @@ header {
     background: transparent;
 
     padding: 12px 12px;
-    border-radius: 10px;
+    border-radius: 12px;
     text-align: left;
     width: 100%;
     font-weight: 900;
@@ -294,8 +322,9 @@ header {
 
   .nav-links a:hover,
   .dropbtn:hover {
-    background: rgba(212,160,23,0.14);
+    background: rgba(255,79,178,0.12);
     opacity: 1;
+    box-shadow: 0 10px 22px rgba(255,79,178,0.14);
   }
 
   /* Dropdown inside panel */
@@ -308,7 +337,6 @@ header {
     min-width: 0;
     background: transparent;
     box-shadow: none;
-    border: none;
     border-radius: 0;
 
     opacity: 1;
@@ -325,11 +353,11 @@ header {
 
   .dropdown-content a {
     padding: 10px 12px;
-    border-radius: 10px;
+    border-radius: 12px;
   }
 
   .dropdown-content a:hover {
-    background: rgba(232,62,140,0.10); /* pink accent in panel */
+    background: rgba(217,162,27,0.14); /* mustard cameo */
   }
 }
 
@@ -373,7 +401,12 @@ header {
   height: auto;
   max-height: 500px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 14px;
+
+  /* Retro frame vibe */
+  box-shadow:
+    0 16px 34px rgba(0,0,0,0.14),
+    0 16px 34px rgba(255,79,178,0.10);
 }
 
 /* =========================
@@ -381,13 +414,19 @@ header {
    ========================= */
 .hours-block {
   padding: 16px;
-  border: 1px solid var(--hours-border);
-  border-radius: 12px;
+  border: 2px solid var(--hours-border);
+  border-radius: 16px;
   max-width: 520px;
   margin: 24px auto;
   text-align: center;
-  background: rgba(255,255,255,0.35);
+
+  /* Warm retro surface */
+  background: rgba(255,255,255,0.45);
   backdrop-filter: blur(2px);
+
+  box-shadow:
+    0 16px 34px rgba(0,0,0,0.10),
+    0 16px 34px rgba(255,79,178,0.10);
 }
 
 .hours-list {
@@ -409,13 +448,14 @@ header {
 }
 
 .hours-row .day {
-  font-weight: 800;
+  font-weight: 900;
   min-width: 110px;
-  color: var(--brand-mustard-deep);
+  color: var(--pink-deep);
+  letter-spacing: 0.02em;
 }
 
 .hours-row .notes {
-  opacity: 0.88;
+  opacity: 0.86;
   font-size: 0.9em;
 }
 
@@ -437,7 +477,9 @@ header {
   color: var(--text-inverse);
   padding: 12px 0;
 
-  box-shadow: 0 -8px 20px rgba(0,0,0,0.18);
+  box-shadow:
+    0 -10px 26px rgba(0,0,0,0.22),
+    0 -12px 30px rgba(255,79,178,0.14);
 }
 
 .footer-inner {
@@ -460,7 +502,7 @@ header {
 }
 
 .footer-label {
-  opacity: 0.92;
+  opacity: 0.9;
 }
 
 .social-link {
@@ -474,13 +516,16 @@ header {
 
   padding: 8px 10px;
   border-radius: 999px;
-  background: rgba(212,160,23,0.20); /* mustard */
-  border: 1px solid rgba(212,160,23,0.22);
+
+  /* Pink-forward chips */
+  background: rgba(255,79,178,0.20);
+  border: 1px solid rgba(255,79,178,0.22);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.14);
 }
 
 .social-link:hover {
-  background: rgba(232,62,140,0.22); /* pink accent */
-  border-color: rgba(232,62,140,0.26);
+  background: rgba(217,162,27,0.22); /* mustard cameo on hover */
+  border-color: rgba(217,162,27,0.26);
 }
 
 .social-link svg {
@@ -491,6 +536,7 @@ header {
 
 /* =========================
    7) Optional Floating Button (Mobile Only)
+   (If you removed the floating button HTML, you can delete this block)
    ========================= */
 .floating-social {
   position: fixed;
@@ -505,16 +551,15 @@ header {
   padding: 12px 14px;
   font-weight: 900;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 
   color: var(--text-primary);
-  background: linear-gradient(
-    135deg,
-    var(--brand-mustard) 0%,
-    var(--brand-mustard) 60%,
-    var(--brand-pink) 100%
-  );
-  border: 2px solid var(--brand-mustard-deep);
+
+  /* Pink-first disco pill */
+  background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 62%, var(--mustard) 100%);
+  box-shadow:
+    0 14px 30px rgba(0,0,0,0.22),
+    0 14px 30px rgba(255,79,178,0.18);
+  border: 2px solid rgba(255,255,255,0.30);
 }
 
 @media (min-width: 900px) {
@@ -545,6 +590,11 @@ header {
 
 .events-title {
   margin-bottom: 14px;
+
+  /* Retro title pop */
+  text-shadow:
+    0 2px 0 rgba(0,0,0,0.08),
+    0 14px 30px rgba(255,79,178,0.12);
 }
 
 .events-grid {
@@ -559,12 +609,15 @@ header {
   margin: 0 auto;
   width: 100%;
   max-width: 420px;
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
 
-  background: var(--surface-soft);
-  border: 2px solid rgba(212,160,23,0.35);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.10);
+  /* More pink, less mustard */
+  background: rgba(255,255,255,0.45);
+  border: 2px solid rgba(255,79,178,0.22);
+  box-shadow:
+    0 16px 34px rgba(0,0,0,0.10),
+    0 16px 34px rgba(255,79,178,0.10);
 }
 
 .event-img {
@@ -582,7 +635,8 @@ header {
 .event-name {
   margin: 0 0 6px 0;
   font-size: 1.05rem;
-  color: var(--brand-mustard-deep);
+  color: var(--pink-deep);
+  letter-spacing: 0.01em;
 }
 
 .event-caption {
@@ -600,6 +654,7 @@ header {
 
 /* =========================
    EVENT TICKET LINK
+   (Retro disco CTA: pink primary, mustard accent)
    ========================= */
 .cta-ticket-link{
   display: inline-block;
@@ -608,33 +663,40 @@ header {
   margin-bottom: 32px;
 
   text-decoration: none;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
   font-weight: 900;
 
   padding: 14px 18px;
   border-radius: 999px;
 
-  color: var(--text-primary);
-  border: 2px solid var(--brand-mustard-deep);
+  color: var(--text-inverse);
+  border: 2px solid rgba(255,255,255,0.30);
+
   background: linear-gradient(
     135deg,
-    var(--brand-mustard) 0%,
-    var(--brand-mustard) 55%,
-    var(--brand-pink) 100%
+    var(--pink) 0%,
+    var(--pink-deep) 68%,
+    rgba(217,162,27,0.95) 100%
   );
-  box-shadow: var(--shadow-soft);
 
-  transition: transform 120ms ease, opacity 120ms ease, filter 120ms ease;
+  box-shadow:
+    0 16px 34px rgba(0,0,0,0.16),
+    0 16px 34px rgba(255,79,178,0.18);
+
+  transition: transform 120ms ease, opacity 120ms ease, filter 120ms ease, box-shadow 120ms ease;
 }
 
 .cta-ticket-link:hover{
   transform: translateY(-1px);
-  opacity: 0.95;
-  filter: saturate(1.06) brightness(1.03);
+  opacity: 0.97;
+  filter: saturate(1.10) brightness(1.04);
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.18),
+    0 18px 40px rgba(255,79,178,0.22);
 }
 
 .cta-ticket-link:active{
   transform: translateY(0px);
-  opacity: 0.90;
+  opacity: 0.92;
 }
