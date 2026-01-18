@@ -1,5 +1,5 @@
 /* =========================
-   0) Theme Variables (Mustard-forward + Retro/Disco)
+   0) Theme Variables (Mustard + Pink, Mustard-forward)
    ========================= */
 :root {
   /* Layout */
@@ -12,35 +12,28 @@
   --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
   /* =========================
-     Color System (Mustard-forward)
+     Color System (Mustard + Pink)
      ========================= */
 
   /* Brand */
   --brand-mustard: #D4A017;
-  --brand-mustard-bright: #F2C94C;
-  --brand-mustard-deep: #8F6509;
-
-  /* Pink is now an accent (less used) */
+  --brand-mustard-bright: #E2B42C;
+  --brand-mustard-deep: #A97C0F;
   --brand-pink: #E83E8C;
-  --brand-pink-deep: #B82667;
-
-  /* Retro support (kept subtle, not primary) */
-  --retro-plum: #2B1024;      /* deep plum */
-  --retro-purple: #4B1E7A;    /* disco shadow glow */
-  --retro-cream: #FFF6DE;
+  --brand-pink-deep: #C92F74;
 
   /* Page */
-  --page-bg-a: #FFF6DE; /* warm cream */
-  --page-bg-b: #FFE7B0; /* more mustard-tinted */
+  --page-bg-a: #FFF6DE; /* warmer cream */
+  --page-bg-b: #FFEFD0; /* mustard-tinted cream */
 
   /* Text */
-  --text-primary: var(--retro-plum);
+  --text-primary: #2B1024; /* deep plum */
   --text-inverse: #ffffff;
-  --menu-text: var(--retro-plum);
+  --menu-text: #2B1024;
 
   /* Surfaces */
   --surface: #ffffff;
-  --surface-soft: rgba(255,246,222,0.82); /* warm cream surface */
+  --surface-soft: rgba(255,246,222,0.75); /* warm cream surface */
 
   /* Borders / dividers */
   --border-soft: rgba(43,16,36,0.14);
@@ -49,20 +42,15 @@
   /* Header / footer */
   --header-grad-a: var(--brand-mustard-bright);
   --header-grad-b: var(--brand-mustard);
-  --footer-bg: var(--retro-plum);
+  --footer-bg: #2B1024;
 
   /* Effects */
   --shadow-soft: 0 0 10px rgba(0,0,0,0.20);
   --shadow-menu: 0 10px 25px rgba(0,0,0,0.20);
   --shadow-panel: 0 14px 35px rgba(0,0,0,0.25);
 
-  /* Retro/Disco glow (used sparingly) */
-  --glow-mustard: 0 0 0 rgba(0,0,0,0), 0 6px 18px rgba(212,160,23,0.28);
-  --glow-pink: 0 0 0 rgba(0,0,0,0), 0 10px 26px rgba(232,62,140,0.18);
-  --glow-purple: 0 0 0 rgba(0,0,0,0), 0 14px 34px rgba(75,30,122,0.16);
-
   /* Components */
-  --hours-border: rgba(143,101,9,0.22);
+  --hours-border: var(--border-soft);
   --hours-divider: rgba(43,16,36,0.10);
 
   /* Footer sizing (for body padding) */
@@ -80,15 +68,9 @@
 
 body {
   font-family: var(--font-body);
+  background: linear-gradient(to bottom right, var(--page-bg-a), var(--page-bg-b));
   color: var(--text-primary);
   line-height: 1.6;
-
-  /* Retro/Disco background: mustard-forward with subtle sparkle */
-  background:
-    radial-gradient(1000px 600px at 15% 10%, rgba(242,201,76,0.35), transparent 55%),
-    radial-gradient(900px 520px at 85% 20%, rgba(212,160,23,0.25), transparent 55%),
-    radial-gradient(900px 520px at 20% 85%, rgba(232,62,140,0.10), transparent 58%),
-    linear-gradient(to bottom right, var(--page-bg-a), var(--page-bg-b));
 
   /* Prevent fixed footer overlap */
   padding-bottom: var(--footer-height);
@@ -98,16 +80,9 @@ body {
    2) Header + Navbar (Sticky)
    ========================= */
 header {
-  /* Mustard-only header (pink reduced to a tiny accent via shadow) */
   background: linear-gradient(to right, var(--header-grad-a), var(--header-grad-b));
   color: var(--text-inverse);
-
-  /* Disco-ish depth */
-  box-shadow:
-    0 10px 22px rgba(0,0,0,0.12),
-    0 10px 28px rgba(212,160,23,0.20),
-    0 18px 45px rgba(75,30,122,0.10);
-
+  box-shadow: var(--shadow-soft);
   padding: 12px 0;
 
   position: sticky;
@@ -142,12 +117,7 @@ header {
   text-decoration: none;
   color: var(--text-inverse);
   white-space: nowrap;
-
-  /* Retro pop */
-  text-shadow:
-    0 2px 0 rgba(0,0,0,0.18),
-    0 6px 16px rgba(212,160,23,0.35),
-    0 10px 24px rgba(75,30,122,0.16);
+  text-shadow: 0 2px 0 rgba(0,0,0,0.15);
 }
 
 /* Links row */
@@ -163,8 +133,8 @@ header {
 .dropbtn {
   font-family: var(--font-ui);
   font-size: 1rem;
-  font-weight: 800;
-  letter-spacing: 0.9px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
 
   color: var(--text-inverse);
@@ -176,15 +146,17 @@ header {
   text-decoration: none;
   line-height: 1;
 
+  /* Needed for underline pseudo-element positioning */
   position: relative;
 }
 
+/* Subtle hover */
 .nav-links a:hover,
 .dropbtn:hover {
   opacity: 0.92;
 }
 
-/* Underline animation (mustard-forward) */
+/* Underline animation */
 .nav-links a::after,
 .dropbtn::after {
   content: "";
@@ -194,7 +166,7 @@ header {
   width: 0%;
   height: 2px;
   background: rgba(255,255,255,0.92);
-  box-shadow: 0 2px 0 rgba(242,201,76,0.75);
+  box-shadow: 0 2px 0 rgba(212,160,23,0.60);
   transition: width 160ms ease;
 }
 
@@ -217,23 +189,19 @@ header {
 
   min-width: 180px;
   background: var(--surface);
-  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
   overflow: hidden;
-
-  /* Retro: stronger border + layered shadow */
-  border: 2px solid rgba(212,160,23,0.22);
-  box-shadow:
-    0 18px 40px rgba(0,0,0,0.18),
-    0 16px 40px rgba(212,160,23,0.18),
-    0 24px 60px rgba(75,30,122,0.10);
-
+  box-shadow: var(--shadow-menu);
   z-index: 2500;
 
+  /* Animated open */
   opacity: 0;
   visibility: hidden;
   transform: translateY(8px);
   transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
 
+  /* Keep it in the DOM for animation */
   display: block;
 }
 
@@ -249,13 +217,13 @@ header {
   padding: 10px 12px;
   text-decoration: none;
   font-family: var(--font-ui);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0;
   text-transform: none;
 }
 
 .dropdown-content a:hover {
-  background: rgba(242,201,76,0.18); /* mustard tint */
+  background: rgba(212,160,23,0.14); /* mustard tint */
 }
 
 /* Hamburger button (hidden on desktop) */
@@ -289,20 +257,15 @@ header {
     right: 16px;
 
     width: min(92vw, 320px);
-
-    /* Mustard-forward panel */
-    background: rgba(255,246,222,0.98);
-    border-radius: 16px;
+    background: rgba(255,246,222,0.97); /* warm cream */
+    border: 1px solid rgba(212,160,23,0.25);
+    border-radius: 14px;
     padding: 12px;
 
     flex-direction: column;
     gap: 10px;
 
-    border: 2px solid rgba(212,160,23,0.22);
-    box-shadow:
-      0 16px 40px rgba(0,0,0,0.20),
-      0 16px 40px rgba(212,160,23,0.18);
-
+    box-shadow: var(--shadow-panel);
     z-index: 3000;
   }
 
@@ -310,18 +273,20 @@ header {
     display: flex;
   }
 
+  /* Tap-friendly items */
   .nav-links a,
   .dropbtn {
     color: var(--menu-text);
     background: transparent;
 
     padding: 12px 12px;
-    border-radius: 12px;
+    border-radius: 10px;
     text-align: left;
     width: 100%;
     font-weight: 900;
   }
 
+  /* No underline animation in panel */
   .nav-links a::after,
   .dropbtn::after {
     display: none;
@@ -329,9 +294,8 @@ header {
 
   .nav-links a:hover,
   .dropbtn:hover {
-    background: rgba(242,201,76,0.20);
+    background: rgba(212,160,23,0.14);
     opacity: 1;
-    box-shadow: var(--glow-mustard);
   }
 
   /* Dropdown inside panel */
@@ -361,12 +325,11 @@ header {
 
   .dropdown-content a {
     padding: 10px 12px;
-    border-radius: 12px;
+    border-radius: 10px;
   }
 
-  /* Pink only as a tiny accent in mobile dropdown hover */
   .dropdown-content a:hover {
-    background: rgba(232,62,140,0.08);
+    background: rgba(232,62,140,0.10); /* pink accent in panel */
   }
 }
 
@@ -410,13 +373,7 @@ header {
   height: auto;
   max-height: 500px;
   object-fit: cover;
-  border-radius: 14px;
-
-  /* Retro frame vibe */
-  box-shadow:
-    0 14px 30px rgba(0,0,0,0.16),
-    0 10px 30px rgba(242,201,76,0.18),
-    0 18px 50px rgba(75,30,122,0.10);
+  border-radius: 12px;
 }
 
 /* =========================
@@ -424,18 +381,13 @@ header {
    ========================= */
 .hours-block {
   padding: 16px;
-  border: 2px solid rgba(212,160,23,0.26);
-  border-radius: 16px;
+  border: 1px solid var(--hours-border);
+  border-radius: 12px;
   max-width: 520px;
   margin: 24px auto;
   text-align: center;
-
-  background: rgba(255,246,222,0.75);
+  background: rgba(255,255,255,0.35);
   backdrop-filter: blur(2px);
-
-  box-shadow:
-    0 14px 30px rgba(0,0,0,0.12),
-    0 12px 28px rgba(242,201,76,0.18);
 }
 
 .hours-list {
@@ -457,10 +409,9 @@ header {
 }
 
 .hours-row .day {
-  font-weight: 900;
+  font-weight: 800;
   min-width: 110px;
   color: var(--brand-mustard-deep);
-  letter-spacing: 0.02em;
 }
 
 .hours-row .notes {
@@ -486,10 +437,7 @@ header {
   color: var(--text-inverse);
   padding: 12px 0;
 
-  box-shadow:
-    0 -10px 26px rgba(0,0,0,0.22),
-    0 -10px 34px rgba(242,201,76,0.14),
-    0 -16px 48px rgba(75,30,122,0.10);
+  box-shadow: 0 -8px 20px rgba(0,0,0,0.18);
 }
 
 .footer-inner {
@@ -515,7 +463,6 @@ header {
   opacity: 0.92;
 }
 
-/* Social links: mustard dominant; pink only on hover */
 .social-link {
   display: inline-flex;
   align-items: center;
@@ -527,16 +474,13 @@ header {
 
   padding: 8px 10px;
   border-radius: 999px;
-
-  background: rgba(242,201,76,0.22);
-  border: 1px solid rgba(242,201,76,0.24);
-
-  box-shadow: 0 10px 22px rgba(0,0,0,0.14);
+  background: rgba(212,160,23,0.20); /* mustard */
+  border: 1px solid rgba(212,160,23,0.22);
 }
 
 .social-link:hover {
-  background: rgba(242,201,76,0.30);
-  box-shadow: 0 10px 26px rgba(0,0,0,0.14), var(--glow-pink);
+  background: rgba(232,62,140,0.22); /* pink accent */
+  border-color: rgba(232,62,140,0.26);
 }
 
 .social-link svg {
@@ -561,22 +505,16 @@ header {
   padding: 12px 14px;
   font-weight: 900;
   cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 
   color: var(--text-primary);
-
-  /* Mustard-first; tiny pink accent only */
   background: linear-gradient(
     135deg,
-    var(--brand-mustard-bright) 0%,
-    var(--brand-mustard) 78%,
-    rgba(232,62,140,0.40) 100%
+    var(--brand-mustard) 0%,
+    var(--brand-mustard) 60%,
+    var(--brand-pink) 100%
   );
-
   border: 2px solid var(--brand-mustard-deep);
-
-  box-shadow:
-    0 14px 30px rgba(0,0,0,0.20),
-    0 14px 32px rgba(242,201,76,0.20);
 }
 
 @media (min-width: 900px) {
@@ -607,11 +545,6 @@ header {
 
 .events-title {
   margin-bottom: 14px;
-
-  /* Retro title pop */
-  text-shadow:
-    0 2px 0 rgba(0,0,0,0.10),
-    0 10px 24px rgba(242,201,76,0.18);
 }
 
 .events-grid {
@@ -621,21 +554,17 @@ header {
   align-items: start;
 }
 
+/* Card already styled earlier; keep it centered within grid */
 .event-card {
   margin: 0 auto;
   width: 100%;
   max-width: 420px;
-  border-radius: 18px;
+  border-radius: 16px;
   overflow: hidden;
 
   background: var(--surface-soft);
-
-  /* Mustard frame + disco depth */
-  border: 3px solid rgba(212,160,23,0.34);
-  box-shadow:
-    0 16px 34px rgba(0,0,0,0.12),
-    0 16px 34px rgba(242,201,76,0.18),
-    0 22px 60px rgba(75,30,122,0.10);
+  border: 2px solid rgba(212,160,23,0.35);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.10);
 }
 
 .event-img {
@@ -653,15 +582,12 @@ header {
 .event-name {
   margin: 0 0 6px 0;
   font-size: 1.05rem;
-
-  /* Mustard first */
   color: var(--brand-mustard-deep);
-  letter-spacing: 0.02em;
 }
 
 .event-caption {
   margin: 0;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 /* Responsive */
@@ -673,15 +599,16 @@ header {
 }
 
 /* =========================
-   EVENT TICKET LINK (Mustard-forward)
+   EVENT TICKET LINK
    ========================= */
 .cta-ticket-link{
   display: inline-block;
 
+  /* spacing from next section */
   margin-bottom: 32px;
 
   text-decoration: none;
-  letter-spacing: 0.10em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 900;
 
@@ -690,33 +617,24 @@ header {
 
   color: var(--text-primary);
   border: 2px solid var(--brand-mustard-deep);
-
-  /* Mustard-heavy gradient; pink is a tiny accent at the end */
   background: linear-gradient(
     135deg,
-    var(--brand-mustard-bright) 0%,
-    var(--brand-mustard) 85%,
-    rgba(232,62,140,0.35) 100%
+    var(--brand-mustard) 0%,
+    var(--brand-mustard) 55%,
+    var(--brand-pink) 100%
   );
+  box-shadow: var(--shadow-soft);
 
-  box-shadow:
-    0 14px 30px rgba(0,0,0,0.14),
-    0 14px 34px rgba(242,201,76,0.22);
-
-  transition: transform 120ms ease, opacity 120ms ease, filter 120ms ease, box-shadow 120ms ease;
+  transition: transform 120ms ease, opacity 120ms ease, filter 120ms ease;
 }
 
 .cta-ticket-link:hover{
   transform: translateY(-1px);
-  opacity: 0.97;
-  filter: saturate(1.08) brightness(1.04);
-  box-shadow:
-    0 16px 34px rgba(0,0,0,0.16),
-    0 16px 40px rgba(242,201,76,0.26),
-    0 22px 60px rgba(75,30,122,0.12);
+  opacity: 0.95;
+  filter: saturate(1.06) brightness(1.03);
 }
 
 .cta-ticket-link:active{
   transform: translateY(0px);
-  opacity: 0.92;
+  opacity: 0.90;
 }
