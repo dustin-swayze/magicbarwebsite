@@ -180,5 +180,8 @@ def kitchen_menu_view(request):
 def bar_menu_view(request):
     latest_menu = CocktailMenuImage.objects.filter(is_approved=True).order_by('-uploaded_at').first()
     cocktails = Cocktail.objects.filter(is_active=True).order_by("name")
-    
-    return render(request, "bar_menu.html", {"cocktails": cocktails})
+
+    return render(request, "main/bar_menu.html", {
+        "latest_menu": latest_menu,
+        "cocktails": cocktails,
+    })
