@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from .views import bar_menu
 
 urlpatterns = [
     # Public pages

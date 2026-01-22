@@ -18,21 +18,28 @@
   </header>
 
   <!-- Cocktails -->
-  <section id="cocktails" class="bar-menu__block bar-menu__frame">
-    <h2 class="bar-menu__section-title">Cocktails</h2>
-{% for c in cocktails %}
-  <article class="cocktail-card">
-    {% if c.image %}
-      <img class="cocktail-card__img" src="{{ c.image.url }}" alt="{{ c.name }}">
-    {% else %}
-      <img class="cocktail-card__img" src="/media/placeholders/coming-soon.jpg" alt="Coming soon">
-    {% endif %}
-    <div class="cocktail-card__body">
-      <h3 class="cocktail-card__name">{{ c.name }}</h3>
-      <p class="cocktail-card__ingredients">{{ c.ingredients }}</p>
-    </div>
-  </article>
-{% endfor %}
+<section id="cocktails" class="bar-menu__block bar-menu__frame">
+  <h2 class="bar-menu__section-title">Cocktails</h2>
+
+  <div class="cocktail-grid">
+    {% for c in cocktails %}
+      <article class="cocktail-card">
+        {% if c.image %}
+          <img class="cocktail-card__img" src="{{ c.image.url }}" alt="{{ c.name }}">
+        {% else %}
+          <img class="cocktail-card__img" src="/media/placeholders/coming-soon.jpg" alt="Coming soon">
+        {% endif %}
+        <div class="cocktail-card__body">
+          <h3 class="cocktail-card__name">{{ c.name }}</h3>
+          <p class="cocktail-card__ingredients">{{ c.ingredients }}</p>
+        </div>
+      </article>
+    {% empty %}
+      <p>No cocktails yet — add some in the admin.</p>
+    {% endfor %}
+  </div>
+</section>
+
 
     <!-- <div class="cocktail-grid">
       <article class="cocktail-card">

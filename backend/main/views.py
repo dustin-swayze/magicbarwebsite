@@ -173,7 +173,10 @@ def kitchen_menu_view(request):
     latest_kitchen_menu = KitchenMenuImage.objects.filter(is_approved=True).order_by('-uploaded_at').first()
     return render(request, 'main/kitchen_menu.html', {'latest_kitchen_menu': latest_kitchen_menu})
 
-def bar_menu(request):
-    cocktails = Cocktail.objects.filter(is_active=True).order_by("sort_order", "name")
-    return render(request, "bar_menu.html", {"cocktails": cocktails})
+# def bar_menu(request):
+#     cocktails = Cocktail.objects.filter(is_active=True).order_by("sort_order", "name")
+#     return render(request, "bar_menu.html", {"cocktails": cocktails})
 
+def bar_menu_view(request):
+    cocktails = Cocktail.objects.filter(is_active=True).order_by("name")
+    return render(request, "bar_menu.html", {"cocktails": cocktails})
