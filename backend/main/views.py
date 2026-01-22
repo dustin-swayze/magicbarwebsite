@@ -6,6 +6,8 @@ from .models import CocktailMenuImage, KitchenMenuImage, CarouselImage, ContactM
 from .models import EventPost
 from django.core.mail import send_mail
 
+from .models import Cocktail
+
 
 def _ensure_hours_rows_exist():
     """
@@ -170,3 +172,8 @@ def bar_menu_view(request):
 def kitchen_menu_view(request):
     latest_kitchen_menu = KitchenMenuImage.objects.filter(is_approved=True).order_by('-uploaded_at').first()
     return render(request, 'main/kitchen_menu.html', {'latest_kitchen_menu': latest_kitchen_menu})
+
+def bar_menu(request):
+    cocktails = Cocktail.objects.filter(is_active=True).order_by("sort_order", "name")
+    return render(request, "bar_menu.html", {"cocktails": cocktails})
+

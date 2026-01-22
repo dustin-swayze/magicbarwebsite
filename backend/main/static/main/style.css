@@ -5,6 +5,7 @@
   /* Layout */
   --container-max: 1100px;
   --container-pad: 24px;
+  --header-height: 86px;
 
   /* Typography */
    --font-body: 'Fredoka', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;

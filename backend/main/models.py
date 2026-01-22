@@ -78,3 +78,17 @@ class EventPost(models.Model):
     def __str__(self):
         name = self.title.strip() if self.title else "Event"
         return f"{name} (order {self.order})"
+
+
+class Cocktail(models.Model):
+    name = models.CharField(max_length=120)
+    ingredients = models.TextField()
+    image = models.ImageField(upload_to="cocktails/", blank=True, null=True)
+    sort_order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["sort_order", "name"]
+
+    def __str__(self):
+        return self.name

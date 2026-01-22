@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import bar_menu
 
 urlpatterns = [
     # Public pages
@@ -25,6 +26,6 @@ urlpatterns = [
 
     # ✅ NEW: Business hours management (staff)
     path('manage/hours/', views.manage_hours, name='manage_hours'),
-    
+
 
 ]
