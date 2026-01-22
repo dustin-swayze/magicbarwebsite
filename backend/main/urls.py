@@ -10,7 +10,7 @@ urlpatterns = [
 
     # Menus
 
-    path('bar-menu/', views.bar_menu_view, name='bar_menu'),
+    path('bar-menu/', views.bar_menu, name='bar_menu'),
     path('kitchen-menu/', views.kitchen_menu_view, name='kitchen_menu'),
 
     # Uploads
