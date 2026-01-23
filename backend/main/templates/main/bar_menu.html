@@ -4,7 +4,7 @@
 
 <section class="bar-menu">
 
-   <!-- HEADER BLOCK -->
+  <!-- HEADER BLOCK -->
   <header class="bar-menu__block bar-menu__header bar-menu__frame">
     <h1 class="bar-menu__title">Drink Menu</h1>
 
@@ -18,231 +18,145 @@
   </header>
 
   <!-- Cocktails -->
-<section id="cocktails" class="bar-menu__block bar-menu__frame">
-  <h2 class="bar-menu__section-title">Cocktails</h2>
+  <section id="cocktails" class="bar-menu__block bar-menu__frame">
+    <h2 class="bar-menu__section-title">Cocktails</h2>
 
-  <div class="cocktail-grid">
-    {% for c in cocktails %}
-      <article class="cocktail-card">
-        {% if c.image %}
-          <img class="cocktail-card__img" src="{{ c.image.url }}" alt="{{ c.name }}">
-        {% else %}
-          <img class="cocktail-card__img" src="/media/placeholders/coming-soon.jpg" alt="Coming soon">
-        {% endif %}
-        <div class="cocktail-card__body">
-          <h3 class="cocktail-card__name">{{ c.name }}</h3>
-          <p class="cocktail-card__ingredients">{{ c.ingredients }}</p>
-        </div>
-      </article>
-    {% empty %}
-      <p>No cocktails yet — add some in the admin.</p>
-    {% endfor %}
-  </div>
-</section>
-
-
-    <!-- <div class="cocktail-grid">
-      <article class="cocktail-card">
-        <img class="cocktail-card__img" src="/media/placeholders/coming-soon.jpg" alt="LIFE ON MARS">
-        <div class="cocktail-card__body">
-          <h3 class="cocktail-card__name">LIFE ON MARS</h3>
-          <p class="cocktail-card__ingredients">Gin, Elderflower, Lemon, Grapefruit</p>
-        </div>
-      </article>
-
-      <article class="cocktail-card">
-        <img class="cocktail-card__img" src="https://via.placeholder.com/800x600" alt="LIKE-MINDED">
-        <div class="cocktail-card__body">
-          <h3 class="cocktail-card__name">LIKE-MINDED</h3>
-          <p class="cocktail-card__ingredients">
-            Reposado Tequila, Montenegro, Lime, Sweet Rosemary, Tiki Bitters, Cabernet Float
-          </p>
-        </div>
-      </article>
-
-      <article class="cocktail-card">
-        <img class="cocktail-card__img" src="https://via.placeholder.com/800x600" alt="QUICK DRAW">
-        <div class="cocktail-card__body">
-          <h3 class="cocktail-card__name">QUICK DRAW</h3>
-          <p class="cocktail-card__ingredients">
-            Japanese Whiskey, Chai Tea, Lemon, Maple, Orange Bitters
-          </p>
-        </div>
-      </article>
-
-      <article class="cocktail-card">
-        <img class="cocktail-card__img" src="https://via.placeholder.com/800x600" alt="PENTHOUSE IN THE SKY">
-        <div class="cocktail-card__body">
-          <h3 class="cocktail-card__name">PENTHOUSE IN THE SKY</h3>
-          <p class="cocktail-card__ingredients">
-            Tito's Vodka, Cocchi Rosa, Tart Cherry, Lemon, Sweet Sage, Topo Chico
-          </p>
-        </div>
-      </article>
-
-      <article class="cocktail-card">
-        <img class="cocktail-card__img" src="https://via.placeholder.com/800x600" alt="DREAM GIRL">
-        <div class="cocktail-card__body">
-          <h3 class="cocktail-card__name">DREAM GIRL</h3>
-          <p class="cocktail-card__ingredients">
-            Teremana Reposado Tequila, Cocchi Americano, Lemon, Creme de Violettee,
-            Butteryfly Pea Flower, Luxardo Cherry, Prosecco
-          </p>
-        </div>
-      </article>
-
-      <article class="cocktail-card">
-        <img class="cocktail-card__img" src="https://via.placeholder.com/800x600" alt="DONKEY KONGIN'">
-        <div class="cocktail-card__body">
-          <h3 class="cocktail-card__name">DONKEY KONGIN'</h3>
-          <p class="cocktail-card__ingredients">
-            Gin, Banana, Lemon, Dry Vermouth, Angostura Bitters
-          </p>
-        </div>
-      </article>
-
-      <article class="cocktail-card">
-        <img class="cocktail-card__img" src="https://via.placeholder.com/800x600" alt="LUCKY IN KENTUCKY">
-        <div class="cocktail-card__body">
-          <h3 class="cocktail-card__name">LUCKY IN KENTUCKY</h3>
-          <p class="cocktail-card__ingredients">
-            Bonded Bourbon, Falernum, Lemon, Pineapple, Angostura Bitters
-          </p>
-        </div>
-      </article>
-
-      <article class="cocktail-card">
-        <img class="cocktail-card__img" src="https://via.placeholder.com/800x600" alt="TWIN FLAME">
-        <div class="cocktail-card__body">
-          <h3 class="cocktail-card__name">TWIN FLAME</h3>
-          <p class="cocktail-card__ingredients">
-            Mezcal, Cacao, Amaro Averna, Fresno Chili Tincture
-          </p>
-        </div>
-      </article>
-
-      <article class="cocktail-card">
-        <img class="cocktail-card__img" src="https://via.placeholder.com/800x600" alt="SNAKE OIL">
-        <div class="cocktail-card__body">
-          <h3 class="cocktail-card__name">SNAKE OIL</h3>
-          <p class="cocktail-card__ingredients">
-            Rum, Falernum, Absinthe, Lime, Honey, Amaro Di Angostura
-          </p>
-        </div>
-      </article>
-
-      <article class="cocktail-card">
-        <img class="cocktail-card__img" src="https://via.placeholder.com/800x600" alt="ESPRESSO MARTINI">
-        <div class="cocktail-card__body">
-          <h3 class="cocktail-card__name">ESPRESSO MARTINI</h3>
-          <p class="cocktail-card__ingredients">
-            Vodka, Espresso Rum, Amaro Averna, House Espresso, Oatmilk
-          </p>
-        </div>
-      </article>
-    </div> -->
+    <div class="cocktail-grid">
+      {% for c in cocktails %}
+        <article class="cocktail-card">
+          {% if c.image %}
+            <img class="cocktail-card__img" src="{{ c.image.url }}" alt="{{ c.name }}">
+          {% else %}
+            <img class="cocktail-card__img" src="/media/placeholders/coming-soon.jpg" alt="Coming soon">
+          {% endif %}
+          <div class="cocktail-card__body">
+            <h3 class="cocktail-card__name">{{ c.name }}</h3>
+            <p class="cocktail-card__ingredients">{{ c.ingredients }}</p>
+          </div>
+        </article>
+      {% empty %}
+        <p>No cocktails yet — add some in the admin.</p>
+      {% endfor %}
+    </div>
   </section>
 
   <!-- Wine -->
 <section id="wine" class="bar-menu__block bar-menu__frame">
   <h2 class="bar-menu__section-title">Vino! (Wine)</h2>
 
-  <!-- Reds -->
-  <div class="wine-group">
-    <h3 class="wine-group__title">Reds</h3>
+  <div class="menu-simple">
 
-    <div class="wine-grid">
-      <article class="wine-card">
-        <h4 class="wine-card__name">Wine Name</h4>
-        <p class="wine-card__origin">Origin (Region, Country)</p>
-      </article>
-
-      <article class="wine-card">
-        <h4 class="wine-card__name">Wine Name</h4>
-        <p class="wine-card__origin">Origin (Region, Country)</p>
-      </article>
-
-      <article class="wine-card">
-        <h4 class="wine-card__name">Wine Name</h4>
-        <p class="wine-card__origin">Origin (Region, Country)</p>
-      </article>
+    <div class="menu-simple__group">
+      <h3 class="menu-simple__title">Whites</h3>
+      <ul class="menu-simple__list">
+        <li><span class="menu-simple__name">Pinot Grigio</span><span class="menu-simple__meta">Italy</span></li>
+        <li><span class="menu-simple__name">Sauvignon Blanc</span><span class="menu-simple__meta">New Zealand</span></li>
+        <li><span class="menu-simple__name">Chardonnay</span><span class="menu-simple__meta">California</span></li>
+        <li><span class="menu-simple__name">Moscato</span><span class="menu-simple__meta">Italy</span></li>
+        <li><span class="menu-simple__name">Rosé</span><span class="menu-simple__meta">France</span></li>
+      </ul>
     </div>
-  </div>
 
-  <!-- Whites -->
-  <div class="wine-group">
-    <h3 class="wine-group__title">Whites</h3>
-
-    <div class="wine-grid">
-      <article class="wine-card">
-        <h4 class="wine-card__name">Wine Name</h4>
-        <p class="wine-card__origin">Origin (Region, Country)</p>
-      </article>
-
-      <article class="wine-card">
-        <h4 class="wine-card__name">Wine Name</h4>
-        <p class="wine-card__origin">Origin (Region, Country)</p>
-      </article>
-
-      <article class="wine-card">
-        <h4 class="wine-card__name">Wine Name</h4>
-        <p class="wine-card__origin">Origin (Region, Country)</p>
-      </article>
+    <div class="menu-simple__group">
+      <h3 class="menu-simple__title">Bubbles</h3>
+      <ul class="menu-simple__list">
+        <li><span class="menu-simple__name">Brut</span><span class="menu-simple__meta">Spain</span></li>
+        <li><span class="menu-simple__name">Prosecco</span><span class="menu-simple__meta">Italy</span></li>
+        <li><span class="menu-simple__name">Lambrusco</span><span class="menu-simple__meta">Italy</span></li>
+      </ul>
     </div>
-  </div>
 
-  <!-- Bubbles -->
-  <div class="wine-group">
-    <h3 class="wine-group__title">Bubbles</h3>
-
-    <div class="wine-grid">
-      <article class="wine-card">
-        <h4 class="wine-card__name">Wine Name</h4>
-        <p class="wine-card__origin">Origin (Region, Country)</p>
-      </article>
-
-      <article class="wine-card">
-        <h4 class="wine-card__name">Wine Name</h4>
-        <p class="wine-card__origin">Origin (Region, Country)</p>
-      </article>
+    <div class="menu-simple__group">
+      <h3 class="menu-simple__title">Reds</h3>
+      <ul class="menu-simple__list">
+        <li><span class="menu-simple__name">Red Blend</span><span class="menu-simple__meta">California</span></li>
+        <li><span class="menu-simple__name">Cabernet Sauvignon</span><span class="menu-simple__meta">California</span></li>
+        <li><span class="menu-simple__name">Pinot Noir</span><span class="menu-simple__meta">California</span></li>
+        <li><span class="menu-simple__name">Malbec</span><span class="menu-simple__meta">California</span></li>
+      </ul>
     </div>
-  </div>
 
+  </div>
 </section>
 
 
-<!-- Draft Beer (contains embed) -->
-<section id="dbeer" class="bar-menu__block bar-menu__frame">
-  <h2 class="bar-menu__section-title">Brewskis! (Draft)</h2>
+  <!-- Draft Beer (contains embed) -->
+  <section id="dbeer" class="bar-menu__block bar-menu__frame">
+    <h2 class="bar-menu__section-title">Brewskis! (Draft)</h2>
 
-  <details class="draft-collapse" open>
-    <summary class="draft-collapse__summary">
-      <span class="draft-collapse__label">Current Draft List</span>
-      <span class="draft-collapse__hint">(tap to expand/collapse)</span>
-    </summary>
+    <details class="draft-collapse" open>
+      <summary class="draft-collapse__summary">
+        <span class="draft-collapse__label">Current Draft List</span>
+        <span class="draft-collapse__hint">(tap to expand/collapse)</span>
+      </summary>
 
-    <div class="draft-collapse__content">
-      <div class="draft-label">Current Draft List</div>
+      <div class="draft-collapse__content">
+        <div class="draft-label">Current Draft List</div>
 
-      <div class="canva-embed">
-        <iframe
-          loading="lazy"
-          src="https://www.canva.com/design/DAGCHK1VoQo/MqjKiJwJRcU5ACuuD1gb3g/view?embed"
-          allowfullscreen="allowfullscreen"
-          allow="fullscreen">
-        </iframe>
+        <div class="canva-embed">
+          <iframe
+            loading="lazy"
+            src="https://www.canva.com/design/DAGCHK1VoQo/MqjKiJwJRcU5ACuuD1gb3g/view?embed"
+            allowfullscreen="allowfullscreen"
+            allow="fullscreen">
+          </iframe>
+        </div>
       </div>
-    </div>
-  </details>
-</section>
-
-  <!-- Bottles and Cans -->
-  <section id="bcbeer" class="bar-menu__block bar-menu__frame">
-    <h2 class="bar-menu__section-title">Bottles &amp; Cans</h2>
-    <div class="bar-menu__text">
-      <p>Type your bottles/cans list here.</p>
-    </div>
+    </details>
   </section>
+
+ <!-- Bottles and Cans -->
+<section id="bcbeer" class="bar-menu__block bar-menu__frame">
+  <h2 class="bar-menu__section-title">Bottles &amp; Cans</h2>
+
+  <div class="menu-simple">
+
+    <div class="menu-simple__group">
+      <h3 class="menu-simple__title">Domestics &amp; Imports</h3>
+      <ul class="menu-simple__list menu-simple__list--single">
+        <li>Michelob Ultra</li>
+        <li>PBR</li>
+        <li>Pabst Light</li>
+        <li>Miller Lite</li>
+        <li>Miller High Life</li>
+        <li>Coors Light</li>
+        <li>Coors Banquet</li>
+        <li>Bud Light</li>
+        <li>Busch Light</li>
+        <li>Yuengling</li>
+        <li>Stella Artois</li>
+        <li>Heineken</li>
+        <li>Shiner Bock</li>
+        <li>Corona Extra</li>
+        <li>Modelo</li>
+        <li>Estrella Jalisco</li>
+        <li>Guinness</li>
+        <li>Montucky Cold Snack</li>
+        <li>Red Stripe</li>
+      </ul>
+    </div>
+
+    <div class="menu-simple__group">
+      <h3 class="menu-simple__title">Groovy Beers</h3>
+      <ul class="menu-simple__list menu-simple__list--single">
+        <li>Wicked Weed Pernicious IPA</li>
+        <li>Bearded Iris Attention Please! DBL IPA</li>
+        <li>Johnson City Brewing Company Peaches</li>
+        <li>Greenman Porter</li>
+        <li>Tripping Animals Lager</li>
+      </ul>
+    </div>
+
+    <div class="menu-simple__group">
+      <h3 class="menu-simple__title">Sours</h3>
+      <ul class="menu-simple__list menu-simple__list--single">
+        <li>Honky Tonk Blueberry Lemonade</li>
+        <li>Tripping Animals Jungle Pop Sour Ale</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
 
   <!-- Happy Hour -->
   <section id="happy-hour" class="bar-menu__block bar-menu__frame">
@@ -255,40 +169,34 @@
 </section>
 
 <style>
-  /* =========================================================
-     Easy theme knobs (edit these later)
-     ========================================================= */
   .bar-menu {
     --frame-border: rgba(255,255,255,0.15);
-    --frame-bg: rgba(255,255,255,0.03);
     --frame-shadow: 0 2px 10px rgba(0,0,0,0.15);
     --frame-radius: 16px;
     --block-pad: 18px;
     --content-max: 1100px;
   }
 
-  /* Overall page container */
   .bar-menu {
     max-width: var(--content-max);
     margin: 0 auto;
     padding: 16px;
-    --sticky-bg: #f4ecff; /* change later if your theme background differs */
+    --sticky-bg: #f4ecff; /* edit later */
   }
 
-  /* Each block is centered and framed */
   .bar-menu__block {
-    margin: 0 auto 22px; /* centers + spacing between blocks */
+    margin: 0 auto 22px;
     width: 100%;
   }
-  .bar-menu__header {
-  /* Only matters if header is sticky in your global CSS */
-  background: var(--sticky-bg);
-  color: var(--text-primary);
-position: sticky;
- top: calc(var(--header-height) + 12px); /* space below the global header */
- z-index: 50; /* low, so dropdowns still win */
 
-}
+  .bar-menu__header {
+    background: var(--sticky-bg);
+    color: var(--text-primary);
+    position: sticky;
+    top: calc(var(--header-height) + 12px);
+    z-index: 50;
+  }
+
   .bar-menu__frame {
     border: 1px solid var(--frame-border);
     background: var(--sticky-bg);
@@ -297,43 +205,36 @@ position: sticky;
     padding: var(--block-pad);
   }
 
-  /* Titles */
-  .bar-menu__title { 
+  .bar-menu__title {
     margin: 0 0 12px;
     color: inherit;
-   }
-  .bar-menu__block-title { margin: 0 0 14px; }
-  .bar-menu__section-title { margin: 0 0 14px; }
-
-/* Quick links "frame" */
-.bar-menu__quicklinks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 12px;
-  border: 1px solid var(--frame-border);
-  border-radius: 12px;
-
-  /* Make it sticky on THIS page only */
-  top: calc(var(--header-height) + 12px);
-  z-index: 50;           /* keep lower than dropdown/header */
-
-  /* Opaque background so it doesn't look translucent */
-  background: var(--sticky-bg);
-  opacity: 1;
-}
-
-  /* Anchor offset if you have a sticky header */
-  .bar-menu__block[id],
-  .bar-menu__section {
-    scroll-margin-top: 90px;
   }
 
-  /* Canva embed: keep it responsive and framed by its parent */
+  .bar-menu__section-title { margin: 0 0 14px; }
+
+  .bar-menu__quicklinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid var(--frame-border);
+    border-radius: 12px;
+    background: var(--sticky-bg);
+  }
+
+  .bar-menu__quicklinks a {
+    text-decoration: none;
+    padding: 10px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--frame-border);
+  }
+
+  .bar-menu__block[id] { scroll-margin-top: 90px; }
+
   .canva-embed {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 */
+    padding-top: 56.25%;
     overflow: hidden;
     border-radius: 12px;
   }
@@ -346,7 +247,7 @@ position: sticky;
     border: 0;
   }
 
-  /* Cocktail cards */
+  /* Cocktails */
   .cocktail-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -371,69 +272,148 @@ position: sticky;
   .cocktail-card__name { margin: 0 0 8px; }
   .cocktail-card__ingredients { margin: 0; opacity: 0.9; line-height: 1.35; }
 
+  /* Shared menu cards (Wine + Bottles/Cans) — match cocktail card vibe */
+  .menu-group { margin-top: 18px; }
+  .menu-group:first-of-type { margin-top: 0; }
+
+  .menu-group__title {
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--frame-border);
+    opacity: 0.95;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+  }
+
+  .menu-card {
+    border: 1px solid var(--frame-border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.02);
+  }
+
+  .menu-card__media {
+    height: 70px;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid var(--frame-border);
+  }
+
+  .menu-card__body { padding: 14px; }
+
+  .menu-card__title {
+    margin: 0 0 6px;
+    letter-spacing: 0.02em;
+  }
+
+  .menu-card__meta {
+    margin: 0;
+    opacity: 0.85;
+    line-height: 1.35;
+  }
+
+  /* Draft collapse */
+  .draft-label {
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    margin: 8px 0 12px;
+    opacity: 0.9;
+  }
+
+  .draft-collapse {
+    border: 1px solid var(--frame-border);
+    border-radius: 12px;
+    padding: 10px;
+    background: rgba(255,255,255,0.02);
+  }
+
+  .draft-collapse__summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 10px;
+    border-radius: 10px;
+    border: 1px solid var(--frame-border);
+  }
+
+  .draft-collapse__summary::-webkit-details-marker { display: none; }
+
+  .draft-collapse__label { font-weight: 600; }
+
+  .draft-collapse__hint {
+    opacity: 0.75;
+    font-size: 0.9em;
+  }
+
+  .draft-collapse__content { padding: 10px 6px 6px; }
+
+  @media (min-width: 768px) {
+    .draft-collapse__summary { display: none; }
+    .draft-collapse { border: none; padding: 0; background: transparent; }
+    .draft-collapse__content { padding: 0; }
+  }
+
   .bar-menu__text p { margin: 0 0 8px; }
 
-
-  /* Draft label */
-.draft-label {
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
-  margin: 8px 0 12px;
-  opacity: 0.9;
+  /* Simple centered lists for Wine + Beer */
+.menu-simple {
+  max-width: 720px;
+  margin: 0 auto;              /* centers inside the frame */
 }
 
-/* Collapsible container styles */
-.draft-collapse {
-  border: 1px solid var(--frame-border);
+.menu-simple__group {
+  margin-top: 18px;
+}
+
+.menu-simple__group:first-child {
+  margin-top: 0;
+}
+
+.menu-simple__title {
+  margin: 0 0 10px;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.menu-simple__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: grid;
+  gap: 8px;
+}
+
+/* Wine list: name left, origin right (still centered as a block) */
+.menu-simple__list li {
+  display: flex;
+  justify-content: center;      /* keeps items centered as a unit */
+  align-items: baseline;
+  gap: 10px;                    /* controls name ↔ origin spacing */
+  padding: 8px 14px;
+  border: 1px solid rgba(255,255,255,0.15);
   border-radius: 12px;
-  padding: 10px;
   background: rgba(255,255,255,0.02);
 }
-
-/* Summary row (mobile) */
-.draft-collapse__summary {
-  cursor: pointer;
-  list-style: none;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 10px;
-  border-radius: 10px;
-  border: 1px solid var(--frame-border);
+.menu-simple__name {
+  font-weight: normal;          /* remove bold */
 }
 
-.draft-collapse__summary::-webkit-details-marker {
-  display: none; /* removes default triangle in Chrome/Safari */
+.menu-simple__meta {
+  font-style: italic;           /* italicize origin */
+  opacity: 0.8;
+  white-space: nowrap;
 }
 
-.draft-collapse__label {
-  font-weight: 600;
-}
-
-.draft-collapse__hint {
-  opacity: 0.75;
-  font-size: 0.9em;
-}
-
-/* Content spacing when expanded */
-.draft-collapse__content {
-  padding: 10px 6px 6px;
-}
-
-/* Desktop behavior: keep it expanded, hide the summary, remove the "collapsible" feel */
-@media (min-width: 768px) {
-  .draft-collapse__summary {
-    display: none;
-  }
-  .draft-collapse {
-    border: none;
-    padding: 0;
-    background: transparent;
-  }
-  .draft-collapse__content {
-    padding: 0;
-  }
+/* Beer lists: single-column items (no right-side meta) */
+.menu-simple__list--single li {
+  justify-content: center;     /* centered text within each row */
+  text-align: center;
 }
 
 </style>
