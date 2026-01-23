@@ -45,8 +45,8 @@
         <div class="dropdown">
           <button class="dropbtn" type="button"onclick="toggleDropdown(event)">Menus ▾</button>
           <div class="dropdown-content" id="dropdown-menus">
-            <a href="/bar-menu">Bar Menu</a>
-            <a href="/kitchen-menu">Kitchen Menu</a>
+            <a href="{% url 'bar_menu' %}">Bar Menu</a>
+            <a href="{% url 'kitchen_menu' %}">Kitchen Menu</a>
           </div>
         </div>
 

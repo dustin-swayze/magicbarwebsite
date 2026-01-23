@@ -8,6 +8,9 @@ from django.core.mail import send_mail
 
 from .models import Cocktail
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 def _ensure_hours_rows_exist():
     """
@@ -134,24 +137,47 @@ def upload_carousel_image(request):
     return render(request, 'main/upload_carousel_image.html', {'form': form})
 
 
+# def contact_view(request):
+#     if request.method == 'POST':
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             contact = form.save()
+#             # Send email to manager
+#             send_mail(
+#                 subject=f"New Contact Message from {contact.name}",
+#                 message=contact.message,
+#                 from_email=contact.email,
+#                 recipient_list=['manager@example.com'],
+#                 fail_silently=False,
+#             )
+#             return redirect('contact_success')
+#     else:
+#         form = ContactForm()
+#     return render(request, 'main/contact.html', {'form': form})
+
 def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
             contact = form.save()
-            # Send email to manager
-            send_mail(
-                subject=f"New Contact Message from {contact.name}",
-                message=contact.message,
-                from_email=contact.email,
-                recipient_list=['manager@example.com'],
-                fail_silently=False,
-            )
+
+            # Email notification (never crash the page if email fails)
+            try:
+                send_mail(
+                    subject=f"New Contact Message from {contact.name}",
+                    message=contact.message,
+                    from_email=getattr(settings, "DEFAULT_FROM_EMAIL", None) or "no-reply@littlemagicjc.com",
+                    recipient_list=getattr(settings, "CONTACT_RECIPIENTS", []) or ["manager@example.com"],
+                    fail_silently=False,
+                )
+            except Exception:
+                logger.exception("Contact form saved but email send failed")
+
             return redirect('contact_success')
     else:
         form = ContactForm()
-    return render(request, 'main/contact.html', {'form': form})
 
+    return render(request, 'main/contact.html', {'form': form})
 
 def contact_success(request):
     return render(request, 'main/contact_success.html')
