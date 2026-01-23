@@ -164,18 +164,9 @@ def view_messages(request):
     return render(request, 'main/view_messages.html', {'messages': messages})
 
 
-# def bar_menu_view(request):
-#     latest_menu = CocktailMenuImage.objects.filter(is_approved=True).order_by('-uploaded_at').first()
-#     return render(request, 'main/bar_menu.html', {'latest_menu': latest_menu})
-
-
 def kitchen_menu_view(request):
     latest_kitchen_menu = KitchenMenuImage.objects.filter(is_approved=True).order_by('-uploaded_at').first()
     return render(request, 'main/kitchen_menu.html', {'latest_kitchen_menu': latest_kitchen_menu})
-
-# def bar_menu(request):
-#     cocktails = Cocktail.objects.filter(is_active=True).order_by("sort_order", "name")
-#     return render(request, "bar_menu.html", {"cocktails": cocktails})
 
 def bar_menu_view(request):
     latest_menu = CocktailMenuImage.objects.filter(is_approved=True).order_by('-uploaded_at').first()
@@ -185,3 +176,7 @@ def bar_menu_view(request):
         "latest_menu": latest_menu,
         "cocktails": cocktails,
     })
+
+
+def online_ordering_view(request):
+    return render(request, "main/online_ordering.html")

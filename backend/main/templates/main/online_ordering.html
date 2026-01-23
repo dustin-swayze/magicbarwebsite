@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="online-order">
+
+  <!-- Hero / CTA -->
+  <header class="online-order__hero">
+    <div class="online-order__hero-inner">
+      <h1 class="online-order__title">Online Ordering</h1>
+      <p class="online-order__subtitle">
+        Order ahead for pickup and we’ll have it ready for you.
+      </p>
+
+      <div class="online-order__actions">
+        <a
+          class="btn btn-primary"
+          href="https://order.spoton.com/glp-voodoo-magic-8692/johnson-city-tn/67a644e969f1905d8511df42"
+          target="_blank"
+          rel="noopener"
+        >
+          Start Online Order
+        </a>
+
+        <!-- <a class="btn btn-outline" href="{% url 'kitchen_menu' %}">
+          View Kitchen Menu
+        </a> -->
+      </div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section class="online-order__block online-order__frame">
+    <h2 class="online-order__section-title">About the Menu</h2>
+    <div class="online-order__text">
+      <p>
+        Our kitchen menu is built for sharing, snacking, and late-night cravings — with rotating specials and
+        house favorites. If you don’t see something you love today, check back soon. Almost everything is GLUTEN FREE.
+      </p>
+      <p>
+        Prefer browsing first? Head to the full kitchen menu to see what’s cooking.
+      </p>
+    </div>
+
+    <div class="online-order__actions">
+      <a class="btn btn-outline" href="{% url 'kitchen_menu' %}">
+        Go to Kitchen Menu
+      </a>
+    </div>
+  </section>
+
+  <!-- Fallback link -->
+  <section class="online-order__block online-order__frame">
+    <h2 class="online-order__section-title">Ordering Link</h2>
+    <p class="online-order__text">
+      If the button above doesn’t open, use this link:
+      <a
+        href="https://order.spoton.com/glp-voodoo-magic-8692/johnson-city-tn/67a644e969f1905d8511df42"
+        target="_blank"
+        rel="noopener"
+      >
+        SpotOn Online Ordering
+      </a>
+    </p>
+  </section>
+
+</section>
+
+<style>
+
+    /* Hero text colors – match site theme */
+.online-order__title {
+  color: var(--text-primary);
+  font-family: var(--font-brand);
+  text-shadow:
+    0 2px 0 rgba(0,0,0,0.08),
+    0 14px 30px rgba(255,79,178,0.18);
+}
+
+.online-order__subtitle {
+  color: var(--menu-text);
+  opacity: 0.9;
+}
+
+  /* Page container */
+  .online-order {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  /* HERO: toned-down, cleaner background */
+  .online-order__hero {
+    margin: 0 auto 22px;
+    padding: 28px;
+
+    border-radius: 22px;
+    border: 1px solid rgba(255,79,178,0.18);
+
+    background: linear-gradient(
+      135deg,
+      rgba(255,255,255,0.85),
+      rgba(255,240,246,0.85)
+    );
+
+    box-shadow:
+      0 20px 50px rgba(0,0,0,0.12),
+      0 12px 30px rgba(255,79,178,0.12);
+  }
+
+  .online-order__hero-inner {
+    max-width: 640px;
+  }
+
+  .online-order__title {
+    margin: 0 0 10px;
+    font-size: 2.2rem;
+    letter-spacing: 0.04em;
+  }
+
+  .online-order__subtitle {
+    margin: 0 0 22px;
+    font-size: 1.05rem;
+    opacity: 0.85;
+  }
+
+  /* Framed blocks for the lower sections (keeps your existing vibe) */
+  .online-order__block {
+    margin: 0 auto 22px;
+    width: 100%;
+  }
+
+  .online-order__frame {
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 18px;
+    background: rgba(255,255,255,0.35);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  }
+
+  .online-order__section-title {
+    margin: 0 0 10px;
+  }
+
+  .online-order__text p {
+    margin: 0 0 10px;
+  }
+
+  /* Buttons */
+  .online-order__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 12px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 14px 22px;
+    border-radius: 999px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid rgba(255,255,255,0.30);
+    transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease, background 120ms ease, color 120ms ease;
+  }
+
+  .btn-primary {
+    color: #fff;
+    background: linear-gradient(135deg, var(--pink), var(--pink-deep));
+    box-shadow:
+      0 14px 30px rgba(255,79,178,0.35),
+      0 10px 22px rgba(0,0,0,0.18);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    opacity: 0.95;
+    box-shadow:
+      0 18px 40px rgba(255,79,178,0.45),
+      0 14px 30px rgba(0,0,0,0.22);
+  }
+
+  .btn-outline {
+    color: var(--pink-deep);
+    border-color: rgba(255,79,178,0.45);
+    background: transparent;
+  }
+
+  .btn-outline:hover {
+    background: rgba(255,79,178,0.12);
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .online-order__hero { padding: 18px; }
+    .online-order__frame { padding: 16px; }
+    .btn { width: 100%; text-align: center; }
+    .online-order__title { font-size: 1.8rem; }
+  }
+</style>
+{% endblock %}

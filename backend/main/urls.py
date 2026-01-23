@@ -11,6 +11,8 @@ urlpatterns = [
 
     path('bar-menu/', views.bar_menu_view, name='bar_menu'),
     path('kitchen-menu/', views.kitchen_menu_view, name='kitchen_menu'),
+    path('order/', views.online_ordering_view, name='online_ordering'),
+
 
     # Uploads
     path('upload-menu/', views.upload_menu, name='upload_menu'),
@@ -26,5 +28,5 @@ urlpatterns = [
     # ✅ NEW: Business hours management (staff)
     path('manage/hours/', views.manage_hours, name='manage_hours'),
 
-
+    
 ]
