@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  .auth-wrap { max-width: 520px; margin: 0 auto; }
+  .auth-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 16px;
+    padding: 18px;
+    margin-top: 16px;
+    backdrop-filter: blur(6px);
+  }
+  .auth-title { font-family: "Righteous", system-ui, sans-serif; margin: 0 0 10px; }
+  .auth-field label { display:block; font-weight:800; margin: 10px 0 6px; font-family:"Fredoka", system-ui, sans-serif; }
+  .auth-field input {
+    width:100%;
+    box-sizing:border-box;
+    padding:10px 12px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,0.18);
+    background: rgba(0,0,0,0.18);
+    color: inherit;
+    font-family:"Fredoka", system-ui, sans-serif;
+  }
+  .auth-actions { margin-top: 14px; display:flex; gap: 12px; flex-wrap:wrap; }
+  .auth-btn {
+    border:0;
+    padding:10px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    font-family:"Fredoka", system-ui, sans-serif;
+    font-weight:900;
+  }
+  .auth-btn.primary { background:#fff; color:#111; }
+  .auth-help { opacity: 0.85; margin-top: 10px; font-family:"Fredoka", system-ui, sans-serif; }
+  .auth-errors { color:#ffb3b3; font-weight:800; margin-top: 10px; }
+</style>
+
+<section class="auth-wrap">
+  <div class="auth-card">
+    <h1 class="auth-title">Staff Login</h1>
+    <p class="auth-help">Log in to complete the closing report.</p>
+
+    {% if form.errors %}
+      <div class="auth-errors">Invalid username or password.</div>
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}">
+
+      <div class="auth-field">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+      </div>
+
+      <div class="auth-field">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+      </div>
+
+      <div class="auth-actions">
+        <button type="submit" class="auth-btn primary">Log In</button>
+      </div>
+    </form>
+
+    <p class="auth-help" style="margin-top: 14px;">
+      After logging in, you’ll return to: <strong>{{ next|default:"/" }}</strong>
+    </p>
+  </div>
+</section>
+{% endblock %}
