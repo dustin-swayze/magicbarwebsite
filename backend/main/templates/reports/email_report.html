@@ -1,0 +1,32 @@
+<h2>Closing Report — {{ report.business_date }}</h2>
+
+<p><strong>Bartenders:</strong>
+  {% for s in report.bartenders.all %}{{ s.name }}{% if not forloop.last %}, {% endif %}{% empty %}—{% endfor %}
+</p>
+<p><strong>Barbacks:</strong>
+  {% for s in report.barbacks.all %}{{ s.name }}{% if not forloop.last %}, {% endif %}{% empty %}—{% endfor %}
+</p>
+<p><strong>Security:</strong>
+  {% for s in report.security.all %}{{ s.name }}{% if not forloop.last %}, {% endif %}{% empty %}—{% endfor %}
+</p>
+
+<hr>
+
+<p><strong>Total Cash:</strong> ${{ report.total_cash }}</p>
+<p><strong>Cash Payments:</strong> ${{ report.cash_payments }}</p>
+
+<hr>
+
+<p><strong>86 List:</strong><br>{{ report.eighty_six_list|linebreaksbr }}</p>
+<p><strong>Shift Notes:</strong><br>{{ report.shift_notes|linebreaksbr }}</p>
+
+<hr>
+
+<h3>Paid Outs</h3>
+<ul>
+  {% for p in report.paid_outs.all %}
+    <li><strong>{{ p.who }}</strong> — ${{ p.amount }} — {{ p.description }}</li>
+  {% empty %}
+    <li>—</li>
+  {% endfor %}
+</ul>

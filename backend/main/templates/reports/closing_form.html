@@ -1,0 +1,311 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+  /* Scoped to closing pages only */
+  .closing-report {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .closing-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 16px;
+    padding: 16px;
+    margin: 16px 0;
+    backdrop-filter: blur(6px);
+  }
+
+  .closing-title {
+    font-family: "Righteous", system-ui, sans-serif;
+    letter-spacing: 0.5px;
+    margin: 0 0 12px;
+  }
+
+  .closing-subtitle {
+    font-family: "Fredoka", system-ui, sans-serif;
+    margin: 0 0 12px;
+    font-weight: 700;
+    opacity: 0.95;
+  }
+
+  .closing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  @media (min-width: 860px) {
+    .closing-grid.two {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .closing-field label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-family: "Fredoka", system-ui, sans-serif;
+  }
+
+  .closing-field input[type="text"],
+  .closing-field input[type="number"],
+  .closing-field input[type="date"],
+  .closing-field textarea,
+  .closing-field select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(0,0,0,0.18);
+    color: inherit;
+    font-family: "Fredoka", system-ui, sans-serif;
+  }
+
+  .closing-field textarea { resize: vertical; }
+
+  .closing-help {
+    opacity: 0.85;
+    font-size: 0.95rem;
+  }
+
+  .closing-errors {
+    color: #ffb3b3;
+    font-weight: 700;
+    margin-top: 6px;
+  }
+
+  .closing-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .closing-btn {
+    border: 0;
+    padding: 10px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: "Fredoka", system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+  }
+
+  .closing-btn.primary {
+    background: #fff;
+    color: #111;
+  }
+
+  .closing-btn.secondary {
+    background: rgba(255,255,255,0.14);
+    color: inherit;
+    border: 1px solid rgba(255,255,255,0.22);
+  }
+
+  .closing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+  .closing-table th, .closing-table td {
+    padding: 10px 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    vertical-align: top;
+    font-family: "Fredoka", system-ui, sans-serif;
+  }
+  .closing-table th {
+    text-align: left;
+    opacity: 0.9;
+  }
+
+  /* Make checkbox lists look nicer */
+  .closing-checklist label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 0;
+    font-weight: 600;
+  }
+
+  .closing-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.12);
+    margin: 12px 0;
+  }
+</style>
+
+<section class="closing-report">
+  <h1 class="closing-title">Closing Report</h1>
+  <p class="closing-help">Fill out the close, review it on the next screen, then email it to management.</p>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="closing-card">
+      <h2 class="closing-subtitle">Date</h2>
+      <div class="closing-field">
+        {{ form.business_date.label_tag }}
+        {{ form.business_date }}
+        {% if form.business_date.errors %}
+          <div class="closing-errors">{{ form.business_date.errors }}</div>
+        {% endif %}
+      </div>
+      <p class="closing-help">This defaults to the “business date” (after midnight counts as yesterday).</p>
+    </div>
+
+    <div class="closing-card">
+      <h2 class="closing-subtitle">Staff</h2>
+
+      <div class="closing-grid two">
+        <div>
+          <div class="closing-field">
+            <label>Bartenders (up to 4)</label>
+            <div class="closing-checklist">{{ form.bartenders }}</div>
+            {% if form.bartenders.errors %}<div class="closing-errors">{{ form.bartenders.errors }}</div>{% endif %}
+          </div>
+        </div>
+
+        <div>
+          <div class="closing-field">
+            <label>Barbacks (up to 2)</label>
+            <div class="closing-checklist">{{ form.barbacks }}</div>
+            {% if form.barbacks.errors %}<div class="closing-errors">{{ form.barbacks.errors }}</div>{% endif %}
+          </div>
+
+          <div class="closing-divider"></div>
+
+          <div class="closing-field">
+            <label>Security (up to 2)</label>
+            <div class="closing-checklist">{{ form.security }}</div>
+            {% if form.security.errors %}<div class="closing-errors">{{ form.security.errors }}</div>{% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="closing-card">
+      <h2 class="closing-subtitle">Money</h2>
+
+      <div class="closing-grid two">
+        <div class="closing-field">
+          {{ form.total_cash.label_tag }}
+          {{ form.total_cash }}
+          {% if form.total_cash.errors %}<div class="closing-errors">{{ form.total_cash.errors }}</div>{% endif %}
+        </div>
+
+        <div class="closing-field">
+          {{ form.cash_payments.label_tag }}
+          {{ form.cash_payments }}
+          {% if form.cash_payments.errors %}<div class="closing-errors">{{ form.cash_payments.errors }}</div>{% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="closing-card">
+      <h2 class="closing-subtitle">86 List</h2>
+      <div class="closing-field">
+        {{ form.eighty_six_list }}
+        {% if form.eighty_six_list.errors %}<div class="closing-errors">{{ form.eighty_six_list.errors }}</div>{% endif %}
+      </div>
+    </div>
+
+    <div class="closing-card">
+      <h2 class="closing-subtitle">Shift Notes</h2>
+      <div class="closing-field">
+        {{ form.shift_notes }}
+        {% if form.shift_notes.errors %}<div class="closing-errors">{{ form.shift_notes.errors }}</div>{% endif %}
+      </div>
+    </div>
+
+    <div class="closing-card">
+      <h2 class="closing-subtitle">Paid Outs</h2>
+
+      {{ formset.management_form }}
+
+      {% if formset.non_form_errors %}
+        <div class="closing-errors">{{ formset.non_form_errors }}</div>
+      {% endif %}
+
+      <table class="closing-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Who</th>
+            <th style="width: 15%;">Amount</th>
+            <th>Description</th>
+            <th style="width: 10%;"></th>
+          </tr>
+        </thead>
+        <tbody id="paidouts-rows">
+          {% for f in formset %}
+            <tr class="paidout-row">
+              <td>
+                {{ f.who }}
+                {% if f.who.errors %}<div class="closing-errors">{{ f.who.errors }}</div>{% endif %}
+              </td>
+              <td>
+                {{ f.amount }}
+                {% if f.amount.errors %}<div class="closing-errors">{{ f.amount.errors }}</div>{% endif %}
+              </td>
+              <td>
+                {{ f.description }}
+                {% if f.description.errors %}<div class="closing-errors">{{ f.description.errors }}</div>{% endif %}
+              </td>
+              <td>
+                {% if f.instance.pk %}{{ f.DELETE }}{% else %}&nbsp;{% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="closing-actions">
+        <button type="button" id="add-paidout" class="closing-btn secondary">+ Add another paid out</button>
+      </div>
+
+      <template id="paidout-empty-form">
+        <tr class="paidout-row">
+          <td>{{ formset.empty_form.who }}</td>
+          <td>{{ formset.empty_form.amount }}</td>
+          <td>{{ formset.empty_form.description }}</td>
+          <td><button type="button" class="closing-btn secondary remove-paidout">Remove</button></td>
+        </tr>
+      </template>
+    </div>
+
+    <div class="closing-actions">
+      <button type="submit" class="closing-btn primary">Preview Report</button>
+    </div>
+  </form>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+(function () {
+  const addBtn = document.getElementById("add-paidout");
+  const rowsContainer = document.getElementById("paidouts-rows");
+  const totalFormsInput = document.getElementById("id_{{ formset.prefix }}-TOTAL_FORMS");
+  const emptyFormTemplate = document.getElementById("paidout-empty-form");
+
+  if (!addBtn || !rowsContainer || !totalFormsInput || !emptyFormTemplate) return;
+
+  addBtn.addEventListener("click", function () {
+    const formIndex = parseInt(totalFormsInput.value, 10);
+    const html = emptyFormTemplate.innerHTML.split("__prefix__").join(formIndex);
+    rowsContainer.insertAdjacentHTML("beforeend", html);
+    totalFormsInput.value = formIndex + 1;
+  });
+
+  rowsContainer.addEventListener("click", function (e) {
+    if (e.target && e.target.classList.contains("remove-paidout")) {
+      const row = e.target.closest("tr");
+      if (row) row.remove();
+    }
+  });
+})();
+</script>
+{% endblock %}

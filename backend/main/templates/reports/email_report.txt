@@ -1,0 +1,21 @@
+Closing Report — {{ report.business_date }}
+
+Bartenders: {% for s in report.bartenders.all %}{{ s.name }}{% if not forloop.last %}, {% endif %}{% empty %}—{% endfor %}
+Barbacks: {% for s in report.barbacks.all %}{{ s.name }}{% if not forloop.last %}, {% endif %}{% empty %}—{% endfor %}
+Security: {% for s in report.security.all %}{{ s.name }}{% if not forloop.last %}, {% endif %}{% empty %}—{% endfor %}
+
+Total Cash: ${{ report.total_cash }}
+Cash Payments: ${{ report.cash_payments }}
+
+86 List:
+{{ report.eighty_six_list }}
+
+Shift Notes:
+{{ report.shift_notes }}
+
+Paid Outs:
+{% for p in report.paid_outs.all %}
+- {{ p.who }} — ${{ p.amount }} — {{ p.description }}
+{% empty %}
+—
+{% endfor %}

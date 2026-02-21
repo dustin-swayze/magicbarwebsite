@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  .closing-report { max-width: 980px; margin: 0 auto; }
+  .closing-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 16px;
+    padding: 16px;
+    margin: 16px 0;
+    backdrop-filter: blur(6px);
+  }
+  .closing-title { font-family: "Righteous", system-ui, sans-serif; margin: 0 0 12px; }
+  .closing-btn { border:0; padding:10px 14px; border-radius:999px; cursor:pointer; font-family:"Fredoka", system-ui, sans-serif; font-weight:800; text-decoration:none; display:inline-flex; align-items:center; }
+  .closing-btn.primary { background:#fff; color:#111; }
+</style>
+
+<section class="closing-report">
+  <h1 class="closing-title">Closing Report Sent</h1>
+
+  <div class="closing-card">
+    <p>Your report for <strong>{{ report.business_date }}</strong> has been emailed to management.</p>
+    <p style="opacity:0.85;">Thank you — you’re done.</p>
+
+    <p style="margin-top: 14px;">
+      <a class="closing-btn primary" href="{% url 'reports_closing_create' %}">Start another report</a>
+    </p>
+  </div>
+</section>
+{% endblock %}

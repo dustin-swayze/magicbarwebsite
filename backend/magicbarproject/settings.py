@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'reports',
 ]
 
 MIDDLEWARE = [
@@ -145,14 +146,40 @@ INSTAGRAM_TOKEN = os.getenv("INSTAGRAM_ACCESS_TOKEN")
 
 # This handles the emailing of a contact form submission to the appropriate email 
 # Currently Unfilled
-EMAIL_BACKEND = os.getenv(
+
+EMAIL_BACKEND = os.environ.get(
     "EMAIL_BACKEND",
-    "django.core.mail.backends.console.EmailBackend" if DEBUG else "django.core.mail.backends.smtp.EmailBackend"
+    "django.core.mail.backends.smtp.EmailBackend",
 )
 
-DEFAULT_FROM_EMAIL = 'webmaster@localhost'
-EMAIL_HOST = 'smtp.yourprovider.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'your-email@example.com'
-EMAIL_HOST_PASSWORD = 'your-app-password'
+EMAIL_HOST = os.environ.get("EMAIL_HOST", "smtp.gmail.com")
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "587"))
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "true").lower() == "true"
+
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
+
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
+
+# comma-separated list in env
+CLOSING_REPORT_RECIPIENTS = [
+    e.strip()
+    for e in os.environ.get("CLOSING_REPORT_RECIPIENTS", "").split(",")
+    if e.strip()
+]
+
+
+
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+# DEFAULT_FROM_EMAIL = 'office@littlemagicjc.com'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'office@littlemagicjc.com'
+# EMAIL_HOST_PASSWORD = 'isxj uzub wqdw xwyo'
+
+# CLOSING_REPORT_RECIPIENTS = [
+#     "office@littlemagicjc.com",
+#     "dswayze@gmail.com",
+# ]

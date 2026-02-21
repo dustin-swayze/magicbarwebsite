@@ -1,0 +1,53 @@
+/* Scoped styles for closing report pages */
+.closing-report .card {
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.closing-report .section-title {
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}
+
+.closing-report .field {
+  margin-bottom: 12px;
+}
+
+.closing-report label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+/* Make inputs fit the existing theme-ish defaults */
+.closing-report input[type="text"],
+.closing-report input[type="number"],
+.closing-report input[type="date"],
+.closing-report textarea,
+.closing-report select {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+/* Paid outs table */
+.closing-report table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.closing-report th,
+.closing-report td {
+  padding: 10px;
+  vertical-align: top;
+}
+
+/* Buttons: we’ll map to your theme classes in the template */
+.closing-report .actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}

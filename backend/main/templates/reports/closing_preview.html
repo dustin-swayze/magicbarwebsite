@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  .closing-report { max-width: 980px; margin: 0 auto; }
+  .closing-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 16px;
+    padding: 16px;
+    margin: 16px 0;
+    backdrop-filter: blur(6px);
+  }
+  .closing-title { font-family: "Righteous", system-ui, sans-serif; margin: 0 0 12px; }
+  .closing-subtitle { font-family: "Fredoka", system-ui, sans-serif; margin: 0 0 12px; font-weight: 800; }
+  .closing-kv { display: grid; grid-template-columns: 170px 1fr; gap: 10px; }
+  .closing-k { opacity: 0.85; font-weight: 800; font-family: "Fredoka", system-ui, sans-serif; }
+  .closing-v { font-family: "Fredoka", system-ui, sans-serif; }
+  .closing-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top: 12px; }
+  .closing-btn { border:0; padding:10px 14px; border-radius:999px; cursor:pointer; font-family:"Fredoka", system-ui, sans-serif; font-weight:800; }
+  .closing-btn.primary { background:#fff; color:#111; }
+  .closing-btn.secondary { background: rgba(255,255,255,0.14); color: inherit; border: 1px solid rgba(255,255,255,0.22); text-decoration: none; display:inline-flex; align-items:center; }
+  .closing-list { margin: 0; padding-left: 18px; }
+  .closing-divider { height: 1px; background: rgba(255,255,255,0.12); margin: 12px 0; }
+</style>
+
+<section class="closing-report">
+  <h1 class="closing-title">Preview Closing Report</h1>
+
+  <div class="closing-card">
+    <h2 class="closing-subtitle">Summary</h2>
+
+    <div class="closing-kv">
+      <div class="closing-k">Date</div>
+      <div class="closing-v">{{ report.business_date }}</div>
+
+      <div class="closing-k">Bartenders</div>
+      <div class="closing-v">
+        {% for s in report.bartenders.all %}{{ s.name }}{% if not forloop.last %}, {% endif %}{% empty %}—{% endfor %}
+      </div>
+
+      <div class="closing-k">Barbacks</div>
+      <div class="closing-v">
+        {% for s in report.barbacks.all %}{{ s.name }}{% if not forloop.last %}, {% endif %}{% empty %}—{% endfor %}
+      </div>
+
+      <div class="closing-k">Security</div>
+      <div class="closing-v">
+        {% for s in report.security.all %}{{ s.name }}{% if not forloop.last %}, {% endif %}{% empty %}—{% endfor %}
+      </div>
+
+      <div class="closing-k">Total Cash</div>
+      <div class="closing-v">${{ report.total_cash }}</div>
+
+      <div class="closing-k">Cash Payments</div>
+      <div class="closing-v">${{ report.cash_payments }}</div>
+    </div>
+  </div>
+
+  <div class="closing-card">
+    <h2 class="closing-subtitle">86 List</h2>
+    <div class="closing-v">{{ report.eighty_six_list|default:"—"|linebreaksbr }}</div>
+  </div>
+
+  <div class="closing-card">
+    <h2 class="closing-subtitle">Shift Notes</h2>
+    <div class="closing-v">{{ report.shift_notes|default:"—"|linebreaksbr }}</div>
+  </div>
+
+  <div class="closing-card">
+    <h2 class="closing-subtitle">Paid Outs</h2>
+    {% if report.paid_outs.all %}
+      <ul class="closing-list">
+        {% for p in report.paid_outs.all %}
+          <li><strong>{{ p.who }}</strong> — ${{ p.amount }} — {{ p.description }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="closing-v">—</div>
+    {% endif %}
+  </div>
+
+  <div class="closing-actions">
+    <a class="closing-btn secondary" href="{% url 'reports_closing_pdf' report.id %}" target="_blank">Download PDF</a>
+
+    <form method="post" action="{% url 'reports_closing_send' report.id %}">
+      {% csrf_token %}
+      <button type="submit" class="closing-btn primary">Email to Management</button>
+    </form>
+  </div>
+
+  {% if report.emailed_at %}
+    <p style="opacity:0.85; margin-top: 12px;">
+      Emailed at {{ report.emailed_at }}.
+    </p>
+  {% endif %}
+</section>
+{% endblock %}
