@@ -5,7 +5,10 @@ services:
     container_name: magicbar_backend
     volumes:
       - ./backend:/app
+      # this is for production server
       - /var/www/magicbar/media:/app/media
+      #this path is for local server
+      # - ./media:/app/media
       - ./data/db.sqlite3:/app/db.sqlite3
 
     ports:

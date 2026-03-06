@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="events-page">
+
+<h1 class="events-page-title">Events</h1>
+
+<div class="events-grid">
+
+{% for event in events %}
+
+<div class="event-card">
+
+{% if event.image %}
+<img src="{{ event.image.url }}" alt="{{ event.title }}">
+{% endif %}
+
+<h3>{{ event.title }}</h3>
+
+{% if event.date %}
+<p class="event-date">{{ event.date }}</p>
+{% endif %}
+
+<p>{{ event.description }}</p>
+
+</div>
+
+{% empty %}
+
+<p>PLEASE CHECK THE INSTAGRAM FOR EVENTS UNTIL THE PAGE IS COMPLETE</p>
+
+{% endfor %}
+
+</div>
+
+</section>
+
+{% endblock %}
+

@@ -28,5 +28,7 @@ urlpatterns = [
     # ✅ NEW: Business hours management (staff)
     path('manage/hours/', views.manage_hours, name='manage_hours'),
 
+    # Events
+    path("events/", views.events_page, name="events"),
     
 ]

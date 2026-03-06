@@ -52,7 +52,7 @@
   GET YOUR NYE TICKET HERE!
 </a> -->
 
-  <div class="events-grid">
+  <!-- <div class="events-grid">
     {% for e in events %}
       <div class="event-card">
         <img class="event-img" src="{{ e.image.url }}" alt="{{ e.title|default:'Event image' }}">
@@ -68,9 +68,33 @@
     <p class="event-admin-link"><a href="/admin/main/eventpost/">Manage Events</a></p>
   {% endif %}
 </section>
-{% endif %}
+{% endif %} -->
 
+<section class="homepage-feature-panels">
+  <a href="/kitchen-menu/" class="feature-panel feature-panel-food">
+    <div class="feature-panel-inner">
+      <span class="feature-panel-kicker">Kitchen</span>
+      <h2>Food Menu</h2>
+      <p>See what’s coming out of the kitchen.</p>
+    </div>
+  </a>
 
+  <a href="/bar-menu/" class="feature-panel feature-panel-bar">
+    <div class="feature-panel-inner">
+      <span class="feature-panel-kicker">Drinks</span>
+      <h2>Bar Menu</h2>
+      <p>Cocktails, beer, wine, and more.</p>
+    </div>
+  </a>
+
+  <a href="/events/" class="feature-panel feature-panel-events">
+    <div class="feature-panel-inner">
+      <span class="feature-panel-kicker">Happenings</span>
+      <h2>Events</h2>
+      <p>Live music, specials, and upcoming nights.</p>
+    </div>
+  </a>
+</section>
 
 <section class="hours-block">
   <h2>Bar Hours of Operation</h2>

@@ -206,3 +206,11 @@ def bar_menu_view(request):
 
 def online_ordering_view(request):
     return render(request, "main/online_ordering.html")
+
+
+
+# EVENTS
+
+def events_page(request):
+    events = EventPost.objects.filter(is_approved=True).order_by("order", "-uploaded_at")[:6]
+    return render(request, "main/events.html", {"events": events})
