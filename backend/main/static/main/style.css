@@ -815,7 +815,7 @@ header {
   opacity: 0.96;
 }
 
-.feature-panel-food,
+/* .feature-panel-food,
 .feature-panel-food::after {
   background-image: url("/media/homepage_panels/food.jpg");
 }
@@ -828,6 +828,39 @@ header {
 .feature-panel-events,
 .feature-panel-events::after {
   background-image: url("/media/homepage_panels/events.jpg");
+} */
+
+.feature-panel {
+  position: relative;
+  display: block;
+  min-height: 420px;
+  border-radius: 18px;
+  overflow: hidden;
+  color: white;
+  text-decoration: none;
+}
+
+.feature-panel-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1);
+  transition: transform .4s ease;
+}
+
+.feature-panel:hover .feature-panel-bg {
+  transform: scale(1.06);
+}
+
+.feature-panel-inner {
+  position: relative;
+  z-index: 2;
+  padding: 30px;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 @media (max-width: 991px) {

@@ -7,6 +7,7 @@ from .models import EventPost
 from django.core.mail import send_mail
 
 from .models import Cocktail
+from .models import HomepagePanel
 
 import logging
 logger = logging.getLogger(__name__)
@@ -29,7 +30,7 @@ def home(request):
     latest_kitchen_menu = KitchenMenuImage.objects.filter(is_approved=True).order_by('-uploaded_at').first()
     carousel_images = CarouselImage.objects.filter(is_approved=True).order_by('-uploaded_at')
     events = EventPost.objects.filter(is_approved=True).order_by("order", "-uploaded_at")[:6]
-
+    panels = HomepagePanel.objects.all()
 
 
     # ✅ NEW: load business hours for homepage
@@ -42,6 +43,7 @@ def home(request):
         'carousel_images': carousel_images,
         'business_hours': business_hours,  # ✅ NEW
         'events': events,
+        'panels': panels,
 
 
     })

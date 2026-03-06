@@ -3,4 +3,4 @@ gunicorn
 Pillow
 django-recaptcha
 reportlab
-
+django-admin-sortable2

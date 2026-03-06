@@ -71,29 +71,21 @@
 {% endif %} -->
 
 <section class="homepage-feature-panels">
-  <a href="/kitchen-menu/" class="feature-panel feature-panel-food">
-    <div class="feature-panel-inner">
-      <span class="feature-panel-kicker">Kitchen</span>
-      <h2>Food Menu</h2>
-      <p>See what’s coming out of the kitchen.</p>
-    </div>
-  </a>
 
-  <a href="/bar-menu/" class="feature-panel feature-panel-bar">
-    <div class="feature-panel-inner">
-      <span class="feature-panel-kicker">Drinks</span>
-      <h2>Bar Menu</h2>
-      <p>Cocktails, beer, wine, and more.</p>
-    </div>
-  </a>
+{% for panel in panels %}
+  <a href="{{ panel.link }}" class="feature-panel">
+    
+    <div class="feature-panel-bg"
+         style="background-image:url('{{ panel.image.url }}')"></div>
 
-  <a href="/events/" class="feature-panel feature-panel-events">
     <div class="feature-panel-inner">
-      <span class="feature-panel-kicker">Happenings</span>
-      <h2>Events</h2>
-      <p>Live music, specials, and upcoming nights.</p>
+      <h2>{{ panel.title }}</h2>
+      <p>{{ panel.caption }}</p>
     </div>
+
   </a>
+{% endfor %}
+
 </section>
 
 <section class="hours-block">

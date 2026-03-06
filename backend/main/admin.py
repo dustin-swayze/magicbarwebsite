@@ -2,6 +2,9 @@ from django.contrib import admin
 from .models import CocktailMenuImage, KitchenMenuImage, CarouselImage, BusinessHours
 from .models import ContactMessage, EventPost
 from .models import Cocktail
+from .models import HomepagePanel
+from adminsortable2.admin import SortableAdminMixin
+
 
 @admin.register(CocktailMenuImage)
 class CocktailMenuImageAdmin(admin.ModelAdmin):
@@ -64,3 +67,7 @@ class CocktailAdmin(admin.ModelAdmin):
     list_display = ("name", "is_active", "sort_order")
     list_editable = ("is_active", "sort_order")
     search_fields = ("name", "ingredients")
+
+@admin.register(HomepagePanel)
+class HomepagePanelAdmin(admin.ModelAdmin):
+    list_display = ("title", "order", "link")

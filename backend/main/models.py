@@ -92,3 +92,17 @@ class Cocktail(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class HomepagePanel(models.Model):
+    title = models.CharField(max_length=100)
+    caption = models.CharField(max_length=200, blank=True)
+    link = models.CharField(max_length=200)
+    image = models.ImageField(upload_to="homepage_panels/")
+    order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+
+    class Meta:
+        ordering = ["order"]
+
+    def __str__(self):
+        return self.title
