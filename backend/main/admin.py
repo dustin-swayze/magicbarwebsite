@@ -50,7 +50,7 @@ class BusinessHoursAdmin(admin.ModelAdmin):
     ordering = ("day",)
 
 @admin.register(EventPost)
-class EventPostAdmin(admin.ModelAdmin):
+class EventPostAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ("title", "is_approved", "order", "uploaded_at", "uploaded_by")
     list_filter = ("is_approved",)
     search_fields = ("title", "caption")

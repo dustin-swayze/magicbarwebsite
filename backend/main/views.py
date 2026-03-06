@@ -214,5 +214,5 @@ def online_ordering_view(request):
 # EVENTS
 
 def events_page(request):
-    events = EventPost.objects.filter(is_approved=True).order_by("order", "-uploaded_at")[:6]
+    events = EventPost.objects.all()
     return render(request, "main/events.html", {"events": events})

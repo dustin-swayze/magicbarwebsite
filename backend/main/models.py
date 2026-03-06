@@ -73,7 +73,7 @@ class EventPost(models.Model):
     order = models.PositiveIntegerField(default=0, help_text="Lower shows first")
 
     class Meta:
-        ordering = ["order", "-uploaded_at"]
+        ordering = ["order"]
 
     def __str__(self):
         name = self.title.strip() if self.title else "Event"
