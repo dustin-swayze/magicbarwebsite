@@ -69,5 +69,5 @@ class CocktailAdmin(admin.ModelAdmin):
     search_fields = ("name", "ingredients")
 
 @admin.register(HomepagePanel)
-class HomepagePanelAdmin(SoftableAdminMixin, admin.ModelAdmin):
+class HomepagePanelAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ("title", "order", "link")
