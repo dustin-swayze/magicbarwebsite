@@ -11,7 +11,6 @@ urlpatterns = [
     # Menus
 
     path('bar-menu/', views.bar_menu_view, name='bar_menu'),
-    path('kitchen-menu/', views.kitchen_menu_view, name='kitchen_menu'),
     path("kitchen-menu/", kitchen_menu, name="kitchen_menu"),
     path('order/', views.online_ordering_view, name='online_ordering'),
 

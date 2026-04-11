@@ -193,9 +193,9 @@ def view_messages(request):
     return render(request, 'main/view_messages.html', {'messages': messages})
 
 
-def kitchen_menu_view(request):
-    latest_kitchen_menu = KitchenMenuImage.objects.filter(is_approved=True).order_by('-uploaded_at').first()
-    return render(request, 'main/kitchen_menu.html', {'latest_kitchen_menu': latest_kitchen_menu})
+# def kitchen_menu_view(request):
+#     latest_kitchen_menu = KitchenMenuImage.objects.filter(is_approved=True).order_by('-uploaded_at').first()
+#     return render(request, 'main/kitchen_menu.html', {'latest_kitchen_menu': latest_kitchen_menu})
 
 def bar_menu_view(request):
     latest_menu = CocktailMenuImage.objects.filter(is_approved=True).order_by('-uploaded_at').first()
