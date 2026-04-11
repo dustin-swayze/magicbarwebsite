@@ -212,7 +212,9 @@ def online_ordering_view(request):
 
 def kitchen_menu(request):
     active_menu = KitchenMenu.objects.filter(is_active=True).first()
-    return render(request, "kitchen_menu.html", {"active_menu": active_menu})
+    return render(request, "kitchen_menu.html", {
+        "active_menu": active_menu
+    })
 
 # EVENTS
 
