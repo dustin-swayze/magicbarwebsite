@@ -4,6 +4,7 @@ from .models import ContactMessage, EventPost
 from .models import Cocktail
 from .models import HomepagePanel
 from adminsortable2.admin import SortableAdminMixin
+from .models import KitchenMenu
 
 
 @admin.register(CocktailMenuImage)
@@ -71,3 +72,14 @@ class CocktailAdmin(admin.ModelAdmin):
 @admin.register(HomepagePanel)
 class HomepagePanelAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ("title", "order", "link")
+
+@admin.register(KitchenMenu)
+class KitchenMenuAdmin(admin.ModelAdmin):
+    list_display = ("title", "is_active", "uploaded_at")
+    list_filter = ("is_active",)
+    search_fields = ("title",)
+
+    def save_model(self, request, obj, form, change):
+        if obj.is_active:
+            KitchenMenu.objects.exclude(pk=obj.pk).update(is_active=False)
+        super().save_model(request, obj, form, change)

@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 
 from .models import Cocktail
 from .models import HomepagePanel
+from .models import KitchenMenu
 
 import logging
 logger = logging.getLogger(__name__)
@@ -209,7 +210,9 @@ def bar_menu_view(request):
 def online_ordering_view(request):
     return render(request, "main/online_ordering.html")
 
-
+def kitchen_menu(request):
+    active_menu = KitchenMenu.objects.filter(is_active=True).first()
+    return render(request, "kitchen_menu.html", {"active_menu": active_menu})
 
 # EVENTS
 

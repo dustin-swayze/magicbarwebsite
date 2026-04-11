@@ -19,6 +19,18 @@ class KitchenMenuImage(models.Model):
     def __str__(self):
         return f"Kitchen Menu uploaded by {self.uploaded_by} on {self.uploaded_at}"
 
+class KitchenMenu(models.Model):
+    title = models.CharField(max_length=200)
+    pdf = models.FileField(upload_to="kitchen_menus/")
+    is_active = models.BooleanField(default=False)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-uploaded_at"]
+
+    def __str__(self):
+        return self.title
+
 class CarouselImage(models.Model):
     image = models.ImageField(upload_to='carousel/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
