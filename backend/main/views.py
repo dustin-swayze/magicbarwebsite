@@ -10,8 +10,40 @@ from .models import Cocktail
 from .models import HomepagePanel
 from .models import KitchenMenu
 
+import json
+import os
+import urllib.parse
+import urllib.request
+from django.conf import settings
+
 import logging
 logger = logging.getLogger(__name__)
+
+def _send_to_ingest(name: str, email: str, message: str) -> None:
+    """
+    POST the contact submission to the portfolio lead-ingest endpoint.
+    Wrapped in try/except everywhere it's called — the public form must
+    never fail because of a dashboard connectivity issue.
+    """
+    api_key = os.environ.get("INGEST_API_KEY", "")
+    if not api_key:
+        logger.warning("INGEST_API_KEY not set — skipping lead ingest")
+        return
+
+    url = (
+        "https://dswayze.dev/api/leads/ingest"
+        f"?source=littlemagicjc.com&key={urllib.parse.quote(api_key, safe='')}"
+    )
+    payload = json.dumps({"name": name, "email": email, "message": message}).encode()
+    req = urllib.request.Request(
+        url,
+        data=payload,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=5) as resp:
+        if resp.status != 200:
+            logger.error("Ingest endpoint returned %s", resp.status)
 
 
 def _ensure_hours_rows_exist():
@@ -139,31 +171,20 @@ def upload_carousel_image(request):
         form = CarouselImageForm()
     return render(request, 'main/upload_carousel_image.html', {'form': form})
 
-
-# def contact_view(request):
-#     if request.method == 'POST':
-#         form = ContactForm(request.POST)
-#         if form.is_valid():
-#             contact = form.save()
-#             # Send email to manager
-#             send_mail(
-#                 subject=f"New Contact Message from {contact.name}",
-#                 message=contact.message,
-#                 from_email=contact.email,
-#                 recipient_list=['manager@example.com'],
-#                 fail_silently=False,
-#             )
-#             return redirect('contact_success')
-#     else:
-#         form = ContactForm()
-#     return render(request, 'main/contact.html', {'form': form})
-
 def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
             contact = form.save()
-
+            # Send lead to portfolio dashboard
+            try:
+                _send_to_ingest(
+                    name=contact.name,
+                    email=contact.email,
+                    message=contact.message,
+                )
+            except Exception:
+                logger.exception("Lead ingest POST failed — continuing")
             # Email notification (never crash the page if email fails)
             try:
                 send_mail(
