@@ -175,6 +175,9 @@ def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
+            # Honeypot — bots fill hidden fields, humans don't
+            if form.cleaned_data.get('website'):
+                return redirect('contact_success')
             contact = form.save()
             # Send lead to portfolio dashboard
             try:

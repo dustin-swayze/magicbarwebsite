@@ -18,6 +18,7 @@ class CarouselImageForm(forms.ModelForm):
         fields = ['image']
 
 class ContactForm(forms.ModelForm):
+    website = forms.CharField(required=False, widget=forms.HiddenInput)
     class Meta:
         model = ContactMessage
         fields = ['name', 'email', 'message']
