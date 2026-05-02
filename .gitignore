@@ -24,4 +24,5 @@ media
 
 db.sqlite3
 
-docker-compose.override.ymlbackups/
+docker-compose.override.yml
+backups/
