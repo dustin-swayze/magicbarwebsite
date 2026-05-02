@@ -31,7 +31,7 @@ def _send_to_ingest(name: str, email: str, message: str) -> None:
         return
 
     url = (
-        "https://dswayze.dev/api/leads/ingest"
+        "https://www.dswayze.dev/api/leads/ingest"
         f"?source=littlemagicjc.com&key={urllib.parse.quote(api_key, safe='')}"
     )
     payload = json.dumps({"name": name, "email": email, "message": message}).encode()
